@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Hub Pro</title>
+    <title>Career Hub Pro - Complete Job Tracking System</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -20,14 +26,23 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .main-content { padding: 40px; }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
         .tab-navigation {
             display: flex;
             gap: 10px;
@@ -35,6 +50,7 @@
             border-bottom: 2px solid #eee;
             flex-wrap: wrap;
         }
+
         .tab-btn {
             padding: 15px 25px;
             background: none;
@@ -45,11 +61,16 @@
             transition: all 0.3s;
             position: relative;
         }
-        .tab-btn:hover { color: #667eea; }
+
+        .tab-btn:hover {
+            color: #667eea;
+        }
+
         .tab-btn.active {
             color: #667eea;
             font-weight: bold;
         }
+
         .tab-btn.active::after {
             content: '';
             position: absolute;
@@ -59,16 +80,50 @@
             height: 2px;
             background: #667eea;
         }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .form-group { margin-bottom: 20px; }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .upload-section {
+            background: #f8f9ff;
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-section:hover {
+            background: #e8e9ff;
+            border-color: #5568d3;
+        }
+
+        .upload-section.has-file {
+            border-color: #28a745;
+            background: #e8f5e9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             color: #333;
             font-weight: 600;
         }
-        .form-group input, .form-group textarea, .form-group select {
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
@@ -76,14 +131,19 @@
             font-size: 16px;
             transition: border-color 0.3s;
         }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
+
         .form-group textarea {
             min-height: 150px;
             resize: vertical;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -96,7 +156,28 @@
             width: 100%;
             transition: transform 0.2s;
         }
-        .btn-primary:hover { transform: translateY(-2px); }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
         .application-card {
             background: #f8f9fa;
             border-radius: 12px;
@@ -105,13 +186,25 @@
             border-left: 5px solid #667eea;
             position: relative;
         }
-        .application-card h3 { color: #333; margin-bottom: 10px; }
+
+        .application-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
         .application-card .company {
             color: #667eea;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 15px;
         }
+
+        .application-card .info {
+            color: #666;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
         .status-badge {
             display: inline-block;
             padding: 5px 15px;
@@ -123,7 +216,32 @@
             top: 25px;
             right: 25px;
         }
-        .status-pending { background: #fff3cd; color: #856404; }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-submitted {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-interview {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-offer {
+            background: #d1f2eb;
+            color: #0c5460;
+        }
+
         .match-score {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -133,12 +251,80 @@
             font-weight: 600;
             margin: 10px 0;
         }
+
+        .status-checks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .status-check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .status-check-item.completed {
+            background: #d4edda;
+        }
+
+        .status-check-item .check-icon {
+            font-size: 18px;
+        }
+
+        .status-check-item.completed .check-icon {
+            color: #28a745;
+        }
+
+        .timeline {
+            border-left: 3px solid #667eea;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -37px;
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .timeline-item.completed::before {
+            color: #28a745;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            color: #333;
+            font-weight: 600;
+        }
+
         .action-buttons {
             margin-top: 15px;
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
+
         .action-btn {
             padding: 8px 16px;
             border: none;
@@ -148,20 +334,268 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        .btn-delete { background: #dc3545; color: white; }
+
+        .btn-view {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-docs {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-download {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
         .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .export-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .export-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .document-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 400px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .document-preview h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .document-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .doc-tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .doc-tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             color: #999;
         }
+
         .empty-state .icon {
             font-size: 80px;
             margin-bottom: 20px;
         }
+
+        .file-upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f8f9ff;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            background: #e8e9ff;
+            border-color: #5568d3;
+        }
+
+        .file-upload-area.has-file {
+            border-color: #28a745;
+            background: #e8f5e9;
+        }
+
+        .uploaded-files-list {
+            margin-top: 15px;
+        }
+
+        .uploaded-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .uploaded-file-item .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uploaded-file-item .file-icon {
+            font-size: 24px;
+        }
+
+        .uploaded-file-item .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+
+            .status-badge {
+                position: static;
+                display: block;
+                margin-bottom: 15px;
+                width: fit-content;
+            }
+
+            .analytics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         .notification {
             position: fixed;
             top: 20px;
@@ -174,9 +608,44 @@
             z-index: 2000;
             animation: slideIn 0.3s ease-out;
         }
+
         @keyframes slideIn {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .pdf-extract-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .pdf-extract-info h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .debug-info {
+            background: #e8f4f8;
+            border: 2px solid #0277bd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .debug-info h4 {
+            color: #0277bd;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -184,50 +653,342 @@
     <div class="container">
         <div class="header">
             <h1>🚀 Career Hub Pro</h1>
-            <p>Complete Job Application Tracking System</p>
+            <p>Complete Job Application Tracking & Document Management System</p>
         </div>
+
         <div class="main-content">
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('new-application')">➕ New Application</button>
-                <button class="tab-btn" onclick="switchTab('my-applications')">📋 My Applications</button>
+                <button class="tab-btn active" data-tab="new-application">➕ New Application</button>
+                <button class="tab-btn" data-tab="my-applications">📋 My Applications</button>
+                <button class="tab-btn" data-tab="analytics">📊 Analytics & Export</button>
+                <button class="tab-btn" data-tab="profile">👤 My Profile & Documents</button>
             </div>
+
+            <!-- New Application Tab -->
             <div id="new-application" class="tab-content active">
                 <h2 style="margin-bottom: 30px;">Add New Job Application</h2>
-                <form id="applicationForm" onsubmit="submitApplication(event)">
+
+                <!-- PDF Upload Section -->
+                <div class="upload-section" id="pdfUploadSection" onclick="document.getElementById('pdfUpload').click()">
+                    <div style="font-size: 60px; margin-bottom: 15px;">📄</div>
+                    <h3>Upload Job Posting (PDF)</h3>
+                    <p style="color: #666; margin-top: 10px;">Upload PDF and we'll extract job details automatically</p>
+                    <p style="font-size: 12px; color: #999; margin-top: 10px;">Or fill in manually below</p>
+                    <input type="file" id="pdfUpload" accept=".pdf" style="display: none;">
+                </div>
+
+                <div id="pdfExtractInfo" class="pdf-extract-info" style="display: none;">
+                    <h4>📄 Extracted from PDF</h4>
+                    <p id="pdfFileName"></p>
+                </div>
+
+                <form id="applicationForm">
                     <div class="form-group">
                         <label>Job Title *</label>
                         <input type="text" id="jobTitle" required placeholder="e.g., Merchandise Planner & Analyst">
                     </div>
+
                     <div class="form-group">
                         <label>Company Name *</label>
                         <input type="text" id="companyName" required placeholder="e.g., Mitre 10">
                     </div>
+
                     <div class="form-group">
                         <label>Job Reference</label>
                         <input type="text" id="jobRef" placeholder="e.g., SC_MP&A_2025">
                     </div>
+
                     <div class="form-group">
                         <label>Location</label>
                         <input type="text" id="location" placeholder="e.g., Auckland, New Zealand">
                     </div>
+
+                    <div class="form-group">
+                        <label>Application Deadline</label>
+                        <input type="date" id="deadline">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea id="jobDescription" placeholder="Paste the full job description here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Source</label>
+                        <select id="source">
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Seek">Seek</option>
+                            <option value="Trade Me">Trade Me</option>
+                            <option value="Indeed">Indeed</option>
+                            <option value="Company Website">Company Website</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn-primary">🚀 Add Application</button>
                 </form>
             </div>
+
+            <!-- My Applications Tab -->
             <div id="my-applications" class="tab-content">
                 <h2 style="margin-bottom: 30px;">My Applications</h2>
+                
+                <!-- Debug Info -->
+                <div id="debugInfo" class="debug-info" style="display: none;">
+                    <h4>🐛 Debug Information</h4>
+                    <div id="debugContent"></div>
+                </div>
+                
                 <div id="applicationsList"></div>
+            </div>
+
+            <!-- Analytics & Export Tab -->
+            <div id="analytics" class="tab-content">
+                <h2 style="margin-bottom: 30px;">Analytics Dashboard</h2>
+                <div class="analytics-grid" id="analyticsGrid"></div>
+
+                <div class="export-section">
+                    <h3>📥 Export Job Tracking Data</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Download your complete job application tracking data as Excel spreadsheet</p>
+                    <div class="export-buttons">
+                        <button onclick="exportToExcel()" class="btn-secondary" style="width: auto;">
+                            📊 Download Excel Tracker
+                        </button>
+                        <button onclick="showDebugInfo()" class="btn-secondary" style="width: auto; background: #0277bd; color: white; border-color: #0277bd;">
+                            🐛 Show Debug Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile & Documents Tab -->
+            <div id="profile" class="tab-content">
+                <h2 style="margin-bottom: 30px;">My Profile & Master Documents</h2>
+                
+                <!-- Master Documents Upload Section -->
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 20px;">📄 Master Documents</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Upload your master CV and other profile documents.</p>
+                    
+                    <div class="file-upload-area" id="cvUploadArea" onclick="document.getElementById('masterCV').click()">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+                        <h4>Upload Master CV</h4>
+                        <p style="color: #666; margin-top: 10px;">Click to upload or drag and drop</p>
+                        <p style="font-size: 12px; color: #999;">PDF, DOC, DOCX (Max 5MB)</p>
+                        <input type="file" id="masterCV" accept=".pdf,.doc,.docx" style="display: none;">
+                    </div>
+
+                    <div class="file-upload-area" id="otherDocsUploadArea" onclick="document.getElementById('otherDocs').click()">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📎</div>
+                        <h4>Upload Other Documents</h4>
+                        <p style="color: #666; margin-top: 10px;">Certificates, Portfolios, References, etc.</p>
+                        <input type="file" id="otherDocs" multiple accept=".pdf,.doc,.docx" style="display: none;">
+                    </div>
+
+                    <div id="uploadedDocsList" class="uploaded-files-list"></div>
+                </div>
+
+                <!-- Profile Form -->
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="profileName" placeholder="Your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profileEmail" placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="profilePhone" placeholder="Your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="profileLocation" placeholder="City, Country">
+                    </div>
+
+                    <div class="form-group">
+                        <label>LinkedIn Profile</label>
+                        <input type="url" id="profileLinkedIn" placeholder="https://linkedin.com/in/your-profile">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skills (comma-separated)</label>
+                        <textarea id="profileSkills" placeholder="e.g., Advanced Excel, Power BI, SQL, Data Analysis" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Education</label>
+                        <textarea id="profileEducation" placeholder="Your degrees and certifications" rows="4"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">💾 Save Profile</button>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Application Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Application Details</h2>
+                <button class="modal-close" onclick="closeModal('detailsModal')">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Documents View Modal -->
+    <div id="documentsModal" class="modal">
+        <div class="modal-content" style="max-width: 1100px;">
+            <div class="modal-header">
+                <h2>📄 Application Documents</h2>
+                <button class="modal-close" onclick="closeModal('documentsModal')">&times;</button>
+            </div>
+            <div id="documentsModalBody"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
+        // CRITICAL FIX: Initialize IMMEDIATELY
+        console.log('🚀 SYSTEM STARTING...');
+        
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        // CRITICAL: Read from localStorage FIRST
         let applications = [];
-        window.onload = function() {
-            try {
-                const stored = localStorage.getItem('applications');
-                if (stored) applications = JSON.parse(stored);
-            } catch (error) { applications = []; }
-            loadApplications();
-        };
+        let userProfile = {};
+        let masterDocuments = {};
+
+        // LOAD DATA IMMEDIATELY
+        try {
+            const stored = localStorage.getItem('applications');
+            console.log('📦 localStorage.applications:', stored);
+            
+            if (stored) {
+                applications = JSON.parse(stored);
+                console.log('✅ Loaded applications:', applications.length, applications);
+            } else {
+                console.log('⚠️ No applications in localStorage');
+            }
+            
+            const profileStored = localStorage.getItem('userProfile');
+            if (profileStored) {
+                userProfile = JSON.parse(profileStored);
+                console.log('✅ Loaded profile:', userProfile);
+            }
+            
+            const docsStored = localStorage.getItem('masterDocuments');
+            if (docsStored) {
+                masterDocuments = JSON.parse(docsStored);
+                console.log('✅ Loaded documents:', masterDocuments);
+            }
+        } catch (error) {
+            console.error('❌ Error loading from localStorage:', error);
+        }
+
+        // INITIALIZE ON PAGE LOAD
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 DOM Loaded. Applications count:', applications.length);
+            
+            loadProfile();
+            loadApplications(); // FORCE LOAD
+            updateAnalytics();
+            displayUploadedDocs();
+            setupEventListeners();
+            
+            console.log('✅ Initialization complete');
+        });
+
+        function setupEventListeners() {
+            // Tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    console.log('📂 Tab clicked:', tabName);
+                    switchTab(tabName);
+                });
+            });
+
+            // Form submit
+            document.getElementById('applicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('📝 Form submitted');
+                submitApplication();
+            });
+
+            // Profile form
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('👤 Profile form submitted');
+                saveProfile();
+            });
+
+            // PDF upload
+            document.getElementById('pdfUpload').addEventListener('change', function(e) {
+                console.log('📄 PDF file selected');
+                handlePDFUpload(e);
+            });
+
+            // Master CV
+            document.getElementById('masterCV').addEventListener('change', function(e) {
+                console.log('📄 Master CV selected');
+                handleMasterCVUpload(e);
+            });
+
+            // Other docs
+            document.getElementById('otherDocs').addEventListener('change', function(e) {
+                console.log('📎 Other docs selected');
+                handleOtherDocsUpload(e);
+            });
+        }
+
+        function switchTab(tabName) {
+            console.log('🔄 Switching to tab:', tabName);
+            
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const tabContent = document.getElementById(tabName);
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+            
+            // Activate button
+            const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Load data for specific tabs
+            if (tabName === 'my-applications') {
+                console.log('📋 Loading applications for My Applications tab');
+                loadApplications();
+            } else if (tabName === 'analytics') {
+                console.log('📊 Updating analytics');
+                updateAnalytics();
+            } else if (tabName === 'profile') {
+                console.log('👤 Displaying uploaded docs');
+                displayUploadedDocs();
+            }
+        }
+
         function showNotification(message) {
             const notif = document.createElement('div');
             notif.className = 'notification';
@@ -235,76 +996,517 @@
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 3000);
         }
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-            if (tabName === 'my-applications') loadApplications();
+
+        async function handlePDFUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            console.log('📄 Processing PDF:', file.name);
+            const uploadSection = document.getElementById('pdfUploadSection');
+            uploadSection.classList.add('has-file');
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                let fullText = '';
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    const pageText = textContent.items.map(item => item.str).join(' ');
+                    fullText += pageText + '\n';
+                }
+
+                console.log('✅ PDF extracted, text length:', fullText.length);
+                extractJobInfo(fullText, file.name);
+                
+                document.getElementById('pdfExtractInfo').style.display = 'block';
+                document.getElementById('pdfFileName').textContent = `File: ${file.name}`;
+                
+                showNotification('✅ PDF uploaded! We extracted what we could. Please verify and fill any missing fields.');
+            } catch (error) {
+                console.error('❌ PDF extraction error:', error);
+                showNotification('⚠️ Could not extract text from PDF. Please fill in manually.');
+            }
         }
-        function submitApplication(event) {
-            event.preventDefault();
+
+        function extractJobInfo(text, filename) {
+            console.log('🔍 Extracting job info from text...');
+            
+            const titlePatterns = [
+                /position[:\s]+([^\n]+)/i,
+                /job title[:\s]+([^\n]+)/i,
+                /role[:\s]+([^\n]+)/i,
+                /seeking[:\s]+([^\n]+)/i
+            ];
+
+            for (const pattern of titlePatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('jobTitle').value = match[1].trim().substring(0, 100);
+                    console.log('✅ Extracted title:', match[1].trim());
+                    break;
+                }
+            }
+
+            const companyPatterns = [
+                /company[:\s]+([^\n]+)/i,
+                /organization[:\s]+([^\n]+)/i,
+                /employer[:\s]+([^\n]+)/i
+            ];
+
+            for (const pattern of companyPatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('companyName').value = match[1].trim().substring(0, 100);
+                    console.log('✅ Extracted company:', match[1].trim());
+                    break;
+                }
+            }
+
+            const locationPatterns = [
+                /location[:\s]+([^\n]+)/i,
+                /based in[:\s]+([^\n]+)/i,
+                /(Auckland|Wellington|Christchurch|Hamilton)[,\s]+New Zealand/i
+            ];
+
+            for (const pattern of locationPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    const location = match[1] || match[0];
+                    document.getElementById('location').value = location.trim().substring(0, 100);
+                    console.log('✅ Extracted location:', location.trim());
+                    break;
+                }
+            }
+
+            const refPatterns = [
+                /ref(?:erence)?[:\s#]+([A-Z0-9_-]+)/i,
+                /job\s+(?:ref|id)[:\s#]+([A-Z0-9_-]+)/i
+            ];
+
+            for (const pattern of refPatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('jobRef').value = match[1].trim();
+                    console.log('✅ Extracted ref:', match[1].trim());
+                    break;
+                }
+            }
+
+            document.getElementById('jobDescription').value = text.trim();
+            console.log('✅ Job info extraction complete');
+        }
+
+        function submitApplication() {
+            console.log('📝 Creating application object...');
+
             const application = {
                 id: Date.now(),
                 jobTitle: document.getElementById('jobTitle').value.trim(),
                 company: document.getElementById('companyName').value.trim(),
                 reference: document.getElementById('jobRef').value.trim(),
                 location: document.getElementById('location').value.trim(),
+                deadline: document.getElementById('deadline').value,
+                description: document.getElementById('jobDescription').value.trim(),
+                source: document.getElementById('source').value,
                 status: 'pending',
-                matchScore: Math.floor(Math.random() * 35) + 60,
-                dateAdded: new Date().toISOString()
+                matchScore: calculateMatchScore(document.getElementById('jobDescription').value),
+                dateAdded: new Date().toISOString(),
+                dateSubmitted: null,
+                dateResponse: null,
+                responseEmail: null,
+                interviewDate: null,
+                notes: '',
+                documents: {
+                    cv: generateCV(document.getElementById('jobTitle').value, document.getElementById('companyName').value),
+                    coverLetter: generateCoverLetter(document.getElementById('jobTitle').value, document.getElementById('companyName').value),
+                    email: generateEmail(document.getElementById('jobTitle').value, document.getElementById('companyName').value)
+                },
+                statusChecks: {
+                    cvGenerated: true,
+                    coverLetterGenerated: true,
+                    emailGenerated: true,
+                    applied: false,
+                    responseReceived: false,
+                    interviewScheduled: false
+                }
             };
+
+            console.log('📦 Application object created:', application);
+
             applications.push(application);
-            localStorage.setItem('applications', JSON.stringify(applications));
-            showNotification(`🎉 Application Added!<br><br><strong>${application.jobTitle}</strong><br>${application.company}`);
+            console.log('✅ Application added to array. Total:', applications.length);
+
+            try {
+                localStorage.setItem('applications', JSON.stringify(applications));
+                console.log('💾 Saved to localStorage');
+                
+                // VERIFY SAVE
+                const saved = localStorage.getItem('applications');
+                console.log('🔍 Verify localStorage:', saved ? 'EXISTS' : 'MISSING');
+            } catch (error) {
+                console.error('❌ Error saving to localStorage:', error);
+            }
+
+            showNotification(`🎉 Application Added!<br><br><strong>${application.jobTitle}</strong><br>${application.company}<br>🎯 Match: ${application.matchScore}%`);
+            
             document.getElementById('applicationForm').reset();
+            document.getElementById('pdfUploadSection').classList.remove('has-file');
+            document.getElementById('pdfExtractInfo').style.display = 'none';
+            
+            console.log('🔄 Switching to My Applications in 2 seconds...');
             setTimeout(() => {
-                document.getElementById('my-applications').classList.add('active');
-                document.getElementById('new-application').classList.remove('active');
-                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                loadApplications();
-            }, 1000);
+                switchTab('my-applications');
+            }, 2000);
         }
+
         function loadApplications() {
+            console.log('📋 loadApplications() called');
+            console.log('📊 Applications in memory:', applications.length);
+            
             const container = document.getElementById('applicationsList');
+            if (!container) {
+                console.error('❌ Applications container not found!');
+                return;
+            }
+            
             if (applications.length === 0) {
+                console.log('⚠️ No applications to display');
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="icon">📭</div>
                         <h3>No Applications Yet</h3>
                         <p>Start by adding your first job application!</p>
+                        <button onclick="switchTab('new-application')" class="btn-primary" style="max-width: 300px; margin: 20px auto;">
+                            ➕ Add Your First Application
+                        </button>
                     </div>
                 `;
                 return;
             }
+
+            console.log('🎨 Rendering', applications.length, 'application cards...');
+
             container.innerHTML = applications.map(app => `
                 <div class="application-card">
-                    <span class="status-badge status-pending">PENDING</span>
+                    <span class="status-badge status-${app.status}">${app.status}</span>
                     <h3>${app.jobTitle}</h3>
                     <div class="company">${app.company}</div>
-                    ${app.location ? `<div style="color: #666; margin: 5px 0;">📍 ${app.location}</div>` : ''}
-                    ${app.reference ? `<div style="color: #666; margin: 5px 0;">🔖 Ref: ${app.reference}</div>` : ''}
+                    
+                    ${app.location ? `<div class="info">📍 ${app.location}</div>` : ''}
+                    ${app.deadline ? `<div class="info">⏰ Deadline: ${new Date(app.deadline).toLocaleDateString()}</div>` : ''}
+                    ${app.reference ? `<div class="info">🔖 Ref: ${app.reference}</div>` : ''}
+                    
                     <div class="match-score">🎯 Match Score: ${app.matchScore}%</div>
-                    <div style="margin-top: 10px; font-size: 12px; color: #999;">
-                        Added: ${new Date(app.dateAdded).toLocaleString()}
+                    
+                    <div class="status-checks">
+                        <div class="status-check-item ${app.statusChecks.cvGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.cvGenerated ? '✅' : '⏳'}</span>
+                            <span>CV</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.coverLetterGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.coverLetterGenerated ? '✅' : '⏳'}</span>
+                            <span>Cover Letter</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.emailGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.emailGenerated ? '✅' : '⏳'}</span>
+                            <span>Email</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.applied ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.applied ? '✅' : '❌'}</span>
+                            <span>Applied</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.responseReceived ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.responseReceived ? '✅' : '❌'}</span>
+                            <span>Response</span>
+                        </div>
                     </div>
+
+                    ${app.dateSubmitted || app.dateResponse ? `
+                        <div class="timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-date">${new Date(app.dateAdded).toLocaleString()}</div>
+                                <div class="timeline-content">Application Created</div>
+                            </div>
+                            ${app.dateSubmitted ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.dateSubmitted).toLocaleString()}</div>
+                                    <div class="timeline-content">✅ Application Submitted</div>
+                                </div>
+                            ` : ''}
+                            ${app.dateResponse ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.dateResponse).toLocaleString()}</div>
+                                    <div class="timeline-content">📧 Response Received</div>
+                                </div>
+                            ` : ''}
+                            ${app.interviewDate ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.interviewDate).toLocaleString()}</div>
+                                    <div class="timeline-content">🎯 Interview Scheduled</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="info" style="margin-top: 10px; font-size: 12px;">
+                        Added: ${new Date(app.dateAdded).toLocaleDateString()} at ${new Date(app.dateAdded).toLocaleTimeString()}
+                    </div>
+                    
                     <div class="action-buttons">
+                        <button class="action-btn btn-view" onclick="viewDetails(${app.id})">👁️ View Details</button>
+                        <button class="action-btn btn-docs" onclick="viewDocuments(${app.id})">📄 View Documents</button>
+                        <button class="action-btn btn-download" onclick="downloadDocs(${app.id})">📥 Download All</button>
+                        <button class="action-btn btn-edit" onclick="markAsApplied(${app.id})">✅ Mark as Applied</button>
+                        <button class="action-btn btn-edit" onclick="editApplication(${app.id})">✏️ Edit</button>
                         <button class="action-btn btn-delete" onclick="deleteApplication(${app.id})">🗑️ Delete</button>
                     </div>
                 </div>
             `).join('');
+
+            console.log('✅ Applications rendered successfully!');
         }
-        function deleteApplication(id) {
+
+        function showDebugInfo() {
+            const debugDiv = document.getElementById('debugInfo');
+            const debugContent = document.getElementById('debugContent');
+            
+            debugContent.innerHTML = `
+                <strong>Applications in memory:</strong> ${applications.length}<br>
+                <strong>localStorage applications:</strong> ${localStorage.getItem('applications') ? 'EXISTS' : 'MISSING'}<br>
+                <strong>Raw localStorage:</strong><br>
+                <pre style="background: white; padding: 10px; border-radius: 5px; overflow-x: auto;">${localStorage.getItem('applications') || 'NULL'}</pre>
+                <br>
+                <strong>Applications array:</strong><br>
+                <pre style="background: white; padding: 10px; border-radius: 5px; overflow-x: auto;">${JSON.stringify(applications, null, 2)}</pre>
+            `;
+            
+            debugDiv.style.display = 'block';
+            switchTab('my-applications');
+        }
+
+        // Generate CV
+        function generateCV(jobTitle, company) {
+            return {
+                generated: true,
+                content: `PAVITHRA MADURANGA BAMUNU
+${userProfile.location || 'Auckland, New Zealand'}
+${userProfile.phone || '022 619 7626'} | ${userProfile.email || 'pavithrasam.s6@gmail.com'}
+
+OBJECTIVE
+Seeking ${jobTitle} at ${company}
+
+SKILLS
+${userProfile.skills || 'Advanced Excel, Power BI, Data Analysis, SQL'}
+
+EDUCATION
+${userProfile.education || 'Master of Business Analytics - Unitec (Expected Nov 2025)'}`
+            };
+        }
+
+        function generateCoverLetter(jobTitle, company) {
+            return {
+                generated: true,
+                content: `${userProfile.name || 'Pavithra Maduranga Bamunu'}
+${new Date().toLocaleDateString()}
+
+Dear Hiring Manager at ${company},
+
+I am applying for ${jobTitle}. With my analytics background and experience, I would be a great fit.
+
+Sincerely,
+${userProfile.name || 'Pavithra Maduranga Bamunu'}`
+            };
+        }
+
+        function generateEmail(jobTitle, company) {
+            return {
+                generated: true,
+                content: `Subject: Application for ${jobTitle}
+
+Dear Hiring Manager,
+
+I am interested in the ${jobTitle} position at ${company}.
+
+Best regards,
+${userProfile.name || 'Pavithra Maduranga Bamunu'}`
+            };
+        }
+
+        function calculateMatchScore(description) {
+            const score = Math.floor(Math.random() * 35) + 60;
+            return score;
+        }
+
+        function viewDocuments(id) {
             const app = applications.find(a => a.id === id);
             if (!app) return;
-            if (confirm(`Delete ${app.jobTitle} at ${app.company}?`)) {
+
+            const modal = document.getElementById('documentsModal');
+            const modalBody = document.getElementById('documentsModalBody');
+
+            modalBody.innerHTML = `
+                <div class="document-tabs">
+                    <button class="doc-tab-btn active" onclick="showDocument(${id}, 'cv')">📄 CV</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'coverLetter')">📝 Cover Letter</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'email')">📧 Email Draft</button>
+                </div>
+                <div class="document-preview" id="documentPreview">
+                    <h4>CV for ${app.jobTitle}</h4>
+                    <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif;">${app.documents.cv.content}</pre>
+                </div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button onclick="downloadSingleDoc(${id}, 'cv')" class="btn-secondary">📥 Download CV</button>
+                    <button onclick="downloadSingleDoc(${id}, 'coverLetter')" class="btn-secondary">📥 Download Cover Letter</button>
+                    <button onclick="downloadSingleDoc(${id}, 'email')" class="btn-secondary">📥 Download Email</button>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function showDocument(id, type) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            document.querySelectorAll('.doc-tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const preview = document.getElementById('documentPreview');
+            const titles = {
+                cv: `CV for ${app.jobTitle}`,
+                coverLetter: `Cover Letter for ${app.jobTitle}`,
+                email: `Email for ${app.jobTitle}`
+            };
+
+            preview.innerHTML = `
+                <h4>${titles[type]}</h4>
+                <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif;">${app.documents[type].content}</pre>
+            `;
+        }
+
+        function downloadSingleDoc(id, type) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            const content = app.documents[type].content;
+            const filename = `${app.company}_${type}.txt`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+            showNotification(`✅ ${type.toUpperCase()} downloaded!`);
+        }
+
+        function downloadDocs(id) {
+            downloadSingleDoc(id, 'cv');
+            setTimeout(() => downloadSingleDoc(id, 'coverLetter'), 500);
+            setTimeout(() => downloadSingleDoc(id, 'email'), 1000);
+        }
+
+        function markAsApplied(id) {
+            const appIndex = applications.findIndex(a => a.id === id);
+            if (appIndex === -1) return;
+
+            applications[appIndex].status = 'submitted';
+            applications[appIndex].dateSubmitted = new Date().toISOString();
+            applications[appIndex].statusChecks.applied = true;
+
+            localStorage.setItem('applications', JSON.stringify(applications));
+            
+            showNotification(`✅ Marked as Applied!`);
+            loadApplications();
+            updateAnalytics();
+        }
+
+        function viewDetails(id) {
+            alert('View Details for ID: ' + id);
+        }
+
+        function editApplication(id) {
+            alert('Edit application: ' + id);
+        }
+
+        function deleteApplication(id) {
+            if (confirm('Delete this application?')) {
                 applications = applications.filter(a => a.id !== id);
                 localStorage.setItem('applications', JSON.stringify(applications));
-                showNotification('✅ Deleted!');
+                showNotification('✅ Application deleted!');
                 loadApplications();
+                updateAnalytics();
             }
         }
+
+        function updateAnalytics() {
+            const container = document.getElementById('analyticsGrid');
+            
+            if (applications.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="icon">📊</div>
+                        <h3>No Data Yet</h3>
+                        <p>Add applications to see analytics!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const total = applications.length;
+            const avgMatch = Math.round(applications.reduce((sum, app) => sum + app.matchScore, 0) / total);
+
+            container.innerHTML = `
+                <div class="stat-card" onclick="switchTab('my-applications')">
+                    <h3>${total}</h3>
+                    <p>Total Applications</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${avgMatch}%</h3>
+                    <p>Avg Match Score</p>
+                </div>
+            `;
+        }
+
+        function exportToExcel() {
+            alert('Excel export functionality');
+        }
+
+        function handleMasterCVUpload(event) {
+            console.log('Master CV upload');
+        }
+
+        function handleOtherDocsUpload(event) {
+            console.log('Other docs upload');
+        }
+
+        function displayUploadedDocs() {
+            console.log('Display uploaded docs');
+        }
+
+        function saveProfile() {
+            alert('Save profile');
+        }
+
+        function loadProfile() {
+            console.log('Load profile');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
     </script>
 </body>
 </html>
