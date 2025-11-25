@@ -134,6 +134,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-right: 10px;
         }
 
         .api-key-setup button:hover {
@@ -623,23 +624,35 @@
                 <div class="api-key-setup" id="apiKeySetup">
                     <h3>🔑 Anthropic API Key</h3>
                     <p style="margin-bottom: 15px; opacity: 0.9;">Enter your Anthropic API key to enable AI-powered document generation.</p>
-                    <input type="password" id="apiKeyInput" placeholder="sk-ant-api..." value="">
+                    <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." value="">
                     <button onclick="saveApiKey()">💾 Save API Key</button>
-                    <button onclick="testApiKey()" style="margin-left: 10px; background: #17a2b8;">🧪 Test API Key</button>
+                    <button onclick="testApiKey()" style="background: #17a2b8;">🧪 Test Connection</button>
                     <p style="margin-top: 15px; font-size: 13px; opacity: 0.8;">
-                        Don't have a key? Get one at: <a href="https://console.anthropic.com/" target="_blank" style="color: white; text-decoration: underline;">console.anthropic.com</a>
+                        Get your key at: <a href="https://console.anthropic.com/" target="_blank" style="color: white; text-decoration: underline;">console.anthropic.com</a>
+                    </p>
+                    <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">
+                        ⚠️ Note: API key is stored locally in your browser only
                     </p>
                 </div>
 
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-top: 20px;">
-                    <h3 style="margin-bottom: 15px;">💰 Usage & Pricing</h3>
-                    <p style="color: #666; margin-bottom: 15px;">
-                        Each AI-generated document costs approximately <strong>$0.01-0.02</strong>.
+                <div style="background: #e8f4f8; padding: 30px; border-radius: 12px; margin-top: 20px; border-left: 4px solid #17a2b8;">
+                    <h3 style="margin-bottom: 15px; color: #0c5460;">💡 How It Works</h3>
+                    <p style="color: #0c5460; margin-bottom: 10px;">
+                        The AI reads your profile + job description and generates:
                     </p>
+                    <ul style="color: #0c5460; padding-left: 20px;">
+                        <li><strong>Custom CV</strong> - Highlighting relevant experience</li>
+                        <li><strong>Cover Letter</strong> - 4 professional paragraphs</li>
+                        <li><strong>Email Draft</strong> - Ready to send</li>
+                        <li><strong>Match Score</strong> - AI-calculated compatibility</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-top: 20px;">
+                    <h3 style="margin-bottom: 15px;">💰 Cost: ~$0.01-0.02 per application</h3>
                     <ul style="color: #666; padding-left: 20px;">
                         <li>50 applications ≈ $1.00</li>
                         <li>100 applications ≈ $2.00</li>
-                        <li>Much cheaper than resume writing services ($100-500)</li>
                     </ul>
                 </div>
             </div>
@@ -650,15 +663,15 @@
 
                 <div class="ai-processing" id="aiProcessing">
                     <div class="spinner"></div>
-                    <h3>🤖 AI is Analyzing Job...</h3>
-                    <p>Writing personalized cover letter and tailoring your CV...</p>
-                    <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">This may take 5-10 seconds...</p>
+                    <h3>🤖 AI is Working...</h3>
+                    <p>Analyzing job description and generating personalized documents...</p>
+                    <p style="font-size: 12px; margin-top: 10px;">This takes 5-15 seconds</p>
                 </div>
 
                 <div class="upload-section" id="pdfUploadSection" onclick="document.getElementById('pdfUpload').click()">
                     <div style="font-size: 60px; margin-bottom: 15px;">📄</div>
-                    <h3>Upload Job Posting (PDF)</h3>
-                    <p style="color: #666; margin-top: 10px;">AI will extract and analyze job details automatically</p>
+                    <h3>Upload Job Posting (PDF) - Optional</h3>
+                    <p style="color: #666; margin-top: 10px;">AI will extract job details automatically</p>
                     <input type="file" id="pdfUpload" accept=".pdf" style="display: none;">
                 </div>
 
@@ -694,8 +707,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Job Description * (AI needs this!)</label>
-                        <textarea id="jobDescription" required placeholder="Paste the FULL job description here for best AI results..."></textarea>
+                        <label>Job Description * (The more detail, the better!)</label>
+                        <textarea id="jobDescription" required placeholder="Paste the FULL job description here...
+
+The AI needs this to:
+- Understand job requirements
+- Match your skills
+- Write personalized cover letter
+- Generate relevant CV"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -712,7 +731,7 @@
                     </div>
 
                     <button type="submit" class="btn-primary" id="submitBtn">
-                        🤖 Generate AI-Powered Application
+                        🤖 Generate AI-Powered Documents
                     </button>
                 </form>
             </div>
@@ -741,8 +760,8 @@
                 <h2 style="margin-bottom: 30px;">My Profile</h2>
                 
                 <div style="background: #fff3cd; padding: 20px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid #ffc107;">
-                    <h4 style="color: #856404; margin-bottom: 10px;">⚠️ Important: Complete Your Profile</h4>
-                    <p style="color: #856404;">AI needs this information to generate personalized documents!</p>
+                    <h4 style="color: #856404; margin-bottom: 10px;">⚠️ Critical: Complete Your Profile First!</h4>
+                    <p style="color: #856404;">AI uses this information to generate ALL documents. The more complete, the better the results!</p>
                 </div>
 
                 <form id="profileForm">
@@ -772,13 +791,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Key Skills * (AI uses these!)</label>
-                        <textarea id="profileSkills" required placeholder="Advanced Excel, XLOOKUP, VLOOKUP, Pivot Tables, Power BI, Data Analysis, SQL, R Programming, Python, Business Analytics, Merchandise Planning, Inventory Management, Supply Chain, Retail Operations" rows="4"></textarea>
+                        <label>Key Skills * (Comma-separated, AI matches these!)</label>
+                        <textarea id="profileSkills" required placeholder="Advanced Excel, XLOOKUP, VLOOKUP, Pivot Tables, Power BI, Data Analysis, SQL, R Programming, Python, Business Analytics, Merchandise Planning, Inventory Management, Supply Chain, Retail Operations, Forecasting, Demand Planning" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Work Experience Summary * (AI needs this!)</label>
-                        <textarea id="profileExperience" required placeholder="E.g., 9 years at Samsung Electronics as Product Manager, achieved 120% sales targets, delivered $15.7M growth. Supply Chain Data Analyst Intern at USL Medical. Operations Attendant at PPCS." rows="5"></textarea>
+                        <label>Work Experience Summary * (AI writes about this!)</label>
+                        <textarea id="profileExperience" required placeholder="Example:
+- 9 years at Samsung Electronics as Product Manager
+- Achieved 120% of annual sales targets for 3 consecutive years
+- Delivered $15.7M in sales growth
+- Trained 500+ retail professionals
+- Supply Chain Data Analyst Intern at USL Medical (Mar-Jun 2025)
+- Operations Attendant at PPCS (Nov 2024-Jul 2025)" rows="6"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -807,7 +832,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
-        console.log('🚀 AI-Powered Career Hub Starting...');
+        console.log('🚀 Career Hub Pro Starting...');
         
         if (typeof pdfjsLib !== 'undefined') {
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -825,7 +850,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             updateAnalytics();
             setupEventListeners();
             checkApiKey();
-            console.log('✅ System initialized. Applications:', applications.length);
+            console.log('✅ System initialized');
         });
 
         function setupEventListeners() {
@@ -848,7 +873,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             document.getElementById('pdfUpload').addEventListener('change', handlePDFUpload);
             
             if (apiKey) {
-                document.getElementById('apiKeyInput').value = '●●●●●●●●●●●●' + apiKey.slice(-6);
+                document.getElementById('apiKeyInput').value = '●●●●●●●●' + apiKey.slice(-8);
             }
         }
 
@@ -857,7 +882,9 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             if (apiKey) {
                 setup.classList.add('configured');
                 setup.querySelector('h3').innerHTML = '✅ API Key Configured';
-                setup.querySelector('p').textContent = 'AI-powered document generation is enabled!';
+                const p = setup.querySelector('p');
+                p.textContent = 'AI-powered document generation is enabled!';
+                p.style.marginBottom = '0';
             }
         }
 
@@ -866,24 +893,32 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             if (input && input.startsWith('sk-ant-api')) {
                 apiKey = input;
                 localStorage.setItem('anthropicApiKey', apiKey);
-                showNotification('✅ API Key Saved!<br><br>AI-powered generation enabled! 🤖', 'success');
+                showNotification('✅ API Key Saved Successfully!<br><br>Click "Test Connection" to verify it works.', 'success');
                 checkApiKey();
             } else {
-                showNotification('❌ Please enter a valid Anthropic API key (starts with sk-ant-api...)', 'error');
+                showNotification('❌ Invalid API Key Format<br><br>Key must start with: sk-ant-api', 'error');
             }
         }
 
         async function testApiKey() {
             if (!apiKey) {
-                showNotification('❌ Please save your API key first!', 'error');
+                showNotification('❌ No API Key Found<br><br>Please save your API key first!', 'error');
                 return;
             }
 
-            showNotification('🧪 Testing API key...', 'success');
+            showNotification('🧪 Testing API Connection...', 'success');
 
             try {
+                console.log('🧪 Testing Anthropic API...');
+                console.log('Key length:', apiKey.length);
+                console.log('Key starts:', apiKey.substring(0, 15));
+                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+
                 const response = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
+                    signal: controller.signal,
                     headers: {
                         'Content-Type': 'application/json',
                         'x-api-key': apiKey,
@@ -891,24 +926,47 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                     },
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
-                        max_tokens: 50,
+                        max_tokens: 30,
                         messages: [{
                             role: 'user',
-                            content: 'Say "API key is working!" in 5 words or less.'
+                            content: 'Reply with exactly: "API works!"'
                         }]
                     })
                 });
 
+                clearTimeout(timeoutId);
+
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+
                 if (response.ok) {
-                    showNotification('✅ API Key Works!<br><br>Ready to generate AI documents! 🤖', 'success');
+                    const data = await response.json();
+                    console.log('✅ API Response:', data);
+                    showNotification('✅ CONNECTION SUCCESS!<br><br>🎉 Your API key works perfectly!<br>Ready to generate AI documents!', 'success');
                 } else {
-                    const error = await response.json();
-                    console.error('API Error:', error);
-                    showNotification(`❌ API Error: ${error.error?.message || 'Invalid key'}`, 'error');
+                    const errorData = await response.json();
+                    console.error('❌ API Error:', errorData);
+                    
+                    let errorMsg = '❌ API Error<br><br>';
+                    if (response.status === 401) {
+                        errorMsg += 'Invalid API Key<br>Please check your key at console.anthropic.com';
+                    } else if (response.status === 429) {
+                        errorMsg += 'Rate limit exceeded<br>Wait a moment and try again';
+                    } else if (response.status === 400) {
+                        errorMsg += 'Bad request<br>This might be a system issue';
+                    } else {
+                        errorMsg += `Error ${response.status}: ${errorData.error?.message || 'Unknown error'}`;
+                    }
+                    showNotification(errorMsg, 'error');
                 }
             } catch (error) {
-                console.error('Test Error:', error);
-                showNotification('❌ Connection error. Check your internet.', 'error');
+                console.error('❌ Test Failed:', error);
+                
+                if (error.name === 'AbortError') {
+                    showNotification('❌ Connection Timeout<br><br>API took too long to respond.<br>Check your internet connection.', 'error');
+                } else {
+                    showNotification('❌ Connection Failed<br><br>Possible causes:<br>1. No internet connection<br>2. Firewall blocking API<br>3. Anthropic servers down', 'error');
+                }
             }
         }
 
@@ -931,7 +989,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             notif.className = 'notification' + (type === 'error' ? ' error' : '');
             notif.innerHTML = message;
             document.body.appendChild(notif);
-            setTimeout(() => notif.remove(), type === 'error' ? 5000 : 3000);
+            setTimeout(() => notif.remove(), type === 'error' ? 6000 : 3500);
         }
 
         async function handlePDFUpload(event) {
@@ -959,10 +1017,10 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                 document.getElementById('pdfExtractInfo').style.display = 'block';
                 document.getElementById('pdfFileName').textContent = `File: ${file.name}`;
                 
-                showNotification('✅ PDF uploaded and analyzed!', 'success');
+                showNotification('✅ PDF Analyzed Successfully!', 'success');
             } catch (error) {
                 console.error('❌ PDF error:', error);
-                showNotification('⚠️ Could not extract PDF. Please fill manually.', 'error');
+                showNotification('⚠️ Could not read PDF<br>Please fill in details manually', 'error');
             }
         }
 
@@ -985,14 +1043,14 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
 
         async function submitApplication() {
             if (!apiKey) {
-                showNotification('⚠️ Please configure your API key first!<br><br>Go to AI Settings tab and enter your Anthropic API key.', 'error');
-                switchTab('api-settings');
+                showNotification('⚠️ API Key Required!<br><br>Go to AI Settings tab and configure your API key first.', 'error');
+                setTimeout(() => switchTab('api-settings'), 2000);
                 return;
             }
 
             if (!userProfile.name || !userProfile.email) {
-                showNotification('⚠️ Please complete your profile first!<br><br>Go to My Profile tab and fill in your information.', 'error');
-                switchTab('profile');
+                showNotification('⚠️ Profile Required!<br><br>Go to My Profile tab and complete your information first.', 'error');
+                setTimeout(() => switchTab('profile'), 2000);
                 return;
             }
 
@@ -1008,9 +1066,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                 const company = document.getElementById('companyName').value.trim();
                 const jobDescription = document.getElementById('jobDescription').value.trim();
 
-                console.log('🤖 Calling Claude API...');
-                console.log('API Key length:', apiKey.length);
-                console.log('API Key starts with:', apiKey.substring(0, 15));
+                console.log('🤖 Generating AI documents...');
 
                 const documents = await generateAIDocuments(jobTitle, company, jobDescription);
                 
@@ -1046,43 +1102,43 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                 applications.push(application);
                 localStorage.setItem('applications', JSON.stringify(applications));
 
-                console.log('✅ Application created with AI documents');
+                console.log('✅ Application saved');
 
-                showNotification(`🎉 AI-Generated Application Added!<br><br><strong>${jobTitle}</strong><br>${company}<br>🎯 Match: ${documents.matchScore}%`, 'success');
+                showNotification(`🎉 AI Documents Generated!<br><br><strong>${jobTitle}</strong><br>${company}<br>🎯 Match Score: ${documents.matchScore}%`, 'success');
                 
                 document.getElementById('applicationForm').reset();
                 document.getElementById('pdfUploadSection').classList.remove('has-file');
                 document.getElementById('pdfExtractInfo').style.display = 'none';
                 
-                setTimeout(() => switchTab('my-applications'), 2000);
+                setTimeout(() => switchTab('my-applications'), 2500);
 
             } catch (error) {
                 console.error('❌ Error:', error);
-                showNotification(`❌ Error: ${error.message}<br><br>Check API key in AI Settings.`, 'error');
+                showNotification(`❌ Generation Failed<br><br>${error.message}<br><br>Try testing your API key in AI Settings.`, 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('loading');
-                submitBtn.textContent = '🤖 Generate AI-Powered Application';
+                submitBtn.textContent = '🤖 Generate AI-Powered Documents';
                 document.getElementById('aiProcessing').classList.remove('active');
             }
         }
 
         async function generateAIDocuments(jobTitle, company, jobDescription) {
-            console.log('🤖 Generating AI documents...');
+            console.log('🤖 Calling Claude API...');
 
-            const prompt = `You are a professional career consultant helping someone apply for jobs. Generate personalized application documents.
+            const prompt = `You are a professional career consultant. Generate personalized job application documents.
 
 JOB DETAILS:
-- Position: ${jobTitle}
-- Company: ${company}
-- Job Description: ${jobDescription}
+Position: ${jobTitle}
+Company: ${company}
+Description: ${jobDescription}
 
 CANDIDATE PROFILE:
 Name: ${userProfile.name}
 Email: ${userProfile.email}
 Phone: ${userProfile.phone}
 Location: ${userProfile.location}
-LinkedIn: ${userProfile.linkedin}
+LinkedIn: ${userProfile.linkedin || 'N/A'}
 
 Skills: ${userProfile.skills}
 
@@ -1090,23 +1146,25 @@ Experience: ${userProfile.experience}
 
 Education: ${userProfile.education}
 
-TASK: Generate 3 documents in JSON format:
+TASK: Generate this exact JSON structure:
 
 {
-  "cv": "Professional CV highlighting relevant skills and experience for this specific job. Include contact info, objective, skills, experience, education. Make it 300-400 words.",
-  "coverLetter": "Professional cover letter (4 paragraphs, 250-350 words). Paragraph 1: Express interest. Paragraph 2-3: Explain why candidate is a great fit, mention specific job requirements and matching experience. Paragraph 4: Call to action. Use formal tone.",
-  "email": "Professional email to send with application (150-200 words). Include subject line, greeting, 2-3 paragraphs explaining interest and qualifications, signature.",
+  "cv": "Professional CV (300-400 words). Include: Contact info, Professional Summary, Key Skills (bullet points), Work Experience (detailed), Education. Highlight skills matching the job.",
+  "coverLetter": "Professional cover letter (250-350 words, 4 paragraphs). Para 1: Express interest and mention how you found the role. Para 2-3: Explain why you're a perfect fit with specific examples matching job requirements. Para 4: Thank them and call to action. Formal business tone.",
+  "email": "Professional email to send with application (150-200 words). Start with: Subject: Application for [Job Title] - [Your Name]. Then: Greeting, 2 paragraphs (interest + key qualifications), closing, signature.",
   "matchScore": 85,
-  "insights": ["Candidate's Power BI skills match job requirement", "9 years retail experience relevant for this role", "Master's degree in Business Analytics aligns with data analysis needs"]
+  "insights": ["Specific skill/experience that matches job requirement 1", "Another matching qualification", "Third relevant match"]
 }
 
-Generate ONLY the JSON object. No other text. Make it professional, personalized, and specific to this job.`;
+OUTPUT ONLY THE JSON. NO OTHER TEXT. Make it professional and job-specific.`;
 
             try {
-                console.log('📡 Sending request to Anthropic API...');
-                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
                 const response = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
+                    signal: controller.signal,
                     headers: {
                         'Content-Type': 'application/json',
                         'x-api-key': apiKey,
@@ -1114,7 +1172,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     },
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
-                        max_tokens: 2500,
+                        max_tokens: 3000,
                         messages: [{
                             role: 'user',
                             content: prompt
@@ -1122,18 +1180,17 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     })
                 });
 
-                console.log('📥 Response status:', response.status);
+                clearTimeout(timeoutId);
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error('API Error Response:', errorData);
-                    throw new Error(errorData.error?.message || `API returned status ${response.status}`);
+                    throw new Error(errorData.error?.message || `API Error ${response.status}`);
                 }
 
                 const data = await response.json();
-                console.log('✅ AI response received');
+                console.log('✅ AI responded');
                 
-                let aiText = data.content[0].text;
+                let aiText = data.content[0].text.trim();
                 aiText = aiText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
                 
                 const documents = JSON.parse(aiText);
@@ -1147,13 +1204,15 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                 };
 
             } catch (error) {
-                console.error('❌ API Error Details:', error);
-                throw new Error(`API call failed: ${error.message}`);
+                if (error.name === 'AbortError') {
+                    throw new Error('API timeout - Try again');
+                }
+                console.error('❌ API Error:', error);
+                throw error;
             }
         }
 
         function loadApplications() {
-            console.log('📋 Loading applications:', applications.length);
             const container = document.getElementById('applicationsList');
             
             if (applications.length === 0) {
@@ -1163,7 +1222,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                         <h3>No Applications Yet</h3>
                         <p>Add your first AI-powered job application!</p>
                         <button onclick="switchTab('new-application')" class="btn-primary" style="max-width: 300px; margin: 20px auto;">
-                            ➕ Add Your First Application
+                            ➕ Add First Application
                         </button>
                     </div>
                 `;
@@ -1182,7 +1241,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     ${app.reference ? `<div class="info">🔖 Ref: ${app.reference}</div>` : ''}
                     
                     <div class="match-score ${app.matchScore >= 80 ? 'high' : app.matchScore >= 60 ? 'medium' : 'low'}">
-                        🎯 AI Match Score: ${app.matchScore}%
+                        🎯 AI Match: ${app.matchScore}%
                     </div>
                     
                     ${app.matchInsights && app.matchInsights.length > 0 ? `
@@ -1196,20 +1255,16 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     
                     <div class="status-checks">
                         <div class="status-check-item ${app.statusChecks.cvGenerated ? 'completed' : ''}">
-                            <span class="check-icon">${app.statusChecks.cvGenerated ? '✅' : '⏳'}</span>
-                            <span>CV</span>
+                            ${app.statusChecks.cvGenerated ? '✅' : '⏳'} CV
                         </div>
                         <div class="status-check-item ${app.statusChecks.coverLetterGenerated ? 'completed' : ''}">
-                            <span class="check-icon">${app.statusChecks.coverLetterGenerated ? '✅' : '⏳'}</span>
-                            <span>Cover Letter</span>
+                            ${app.statusChecks.coverLetterGenerated ? '✅' : '⏳'} Cover Letter
                         </div>
                         <div class="status-check-item ${app.statusChecks.emailGenerated ? 'completed' : ''}">
-                            <span class="check-icon">${app.statusChecks.emailGenerated ? '✅' : '⏳'}</span>
-                            <span>Email</span>
+                            ${app.statusChecks.emailGenerated ? '✅' : '⏳'} Email
                         </div>
                         <div class="status-check-item ${app.statusChecks.applied ? 'completed' : ''}">
-                            <span class="check-icon">${app.statusChecks.applied ? '✅' : '❌'}</span>
-                            <span>Applied</span>
+                            ${app.statusChecks.applied ? '✅' : '❌'} Applied
                         </div>
                     </div>
                     
@@ -1218,7 +1273,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     </div>
                     
                     <div class="action-buttons">
-                        <button class="action-btn btn-docs" onclick="viewDocuments(${app.id})">📄 View AI Documents</button>
+                        <button class="action-btn btn-docs" onclick="viewDocuments(${app.id})">📄 View Documents</button>
                         <button class="action-btn btn-download" onclick="downloadDocs(${app.id})">📥 Download All</button>
                         <button class="action-btn btn-edit" onclick="markAsApplied(${app.id})">✅ Mark Applied</button>
                         <button class="action-btn btn-delete" onclick="deleteApplication(${app.id})">🗑️ Delete</button>
@@ -1236,19 +1291,19 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
 
             modalBody.innerHTML = `
                 <div class="document-tabs">
-                    <button class="doc-tab-btn active" onclick="showDocument(${id}, 'cv')">📄 AI-Generated CV</button>
-                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'coverLetter')">📝 AI Cover Letter</button>
-                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'email')">📧 AI Email Draft</button>
+                    <button class="doc-tab-btn active" onclick="showDocument(${id}, 'cv')">📄 CV</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'coverLetter')">📝 Cover Letter</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'email')">📧 Email</button>
                 </div>
                 <div class="document-preview" id="documentPreview">
-                    <h4>🤖 AI-Generated CV for ${app.jobTitle} at ${app.company}</h4>
+                    <h4>🤖 AI-Generated CV for ${app.jobTitle}</h4>
                     <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.8;">${app.documents.cv.content}</pre>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                     <button onclick="downloadSingleDoc(${id}, 'cv')" class="btn-secondary">📥 Download CV</button>
                     <button onclick="downloadSingleDoc(${id}, 'coverLetter')" class="btn-secondary">📥 Download Cover Letter</button>
                     <button onclick="downloadSingleDoc(${id}, 'email')" class="btn-secondary">📥 Download Email</button>
-                    <button onclick="copyToClipboard(${id}, 'cv')" class="btn-secondary">📋 Copy CV</button>
+                    <button onclick="copyToClipboard(${id}, 'cv')" class="btn-secondary">📋 Copy</button>
                 </div>
             `;
 
@@ -1264,9 +1319,9 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
 
             const preview = document.getElementById('documentPreview');
             const titles = {
-                cv: `🤖 AI-Generated CV for ${app.jobTitle} at ${app.company}`,
-                coverLetter: `🤖 AI-Generated Cover Letter for ${app.jobTitle}`,
-                email: `🤖 AI-Generated Email for ${app.jobTitle}`
+                cv: `🤖 AI-Generated CV for ${app.jobTitle}`,
+                coverLetter: `🤖 AI-Generated Cover Letter`,
+                email: `🤖 AI-Generated Email`
             };
 
             preview.innerHTML = `
@@ -1290,7 +1345,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             a.click();
             window.URL.revokeObjectURL(url);
 
-            showNotification(`✅ ${type.toUpperCase()} downloaded!`, 'success');
+            showNotification(`✅ ${type.toUpperCase()} Downloaded!`, 'success');
         }
 
         function copyToClipboard(id, type) {
@@ -1298,7 +1353,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             if (!app) return;
 
             navigator.clipboard.writeText(app.documents[type].content);
-            showNotification(`✅ ${type.toUpperCase()} copied to clipboard!`, 'success');
+            showNotification(`✅ Copied to Clipboard!`, 'success');
         }
 
         function downloadDocs(id) {
@@ -1353,7 +1408,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                 </div>
                 <div class="stat-card">
                     <h3>${avgMatch}%</h3>
-                    <p>Avg AI Match Score</p>
+                    <p>Avg Match Score</p>
                 </div>
                 <div class="stat-card">
                     <h3>${aiGenerated}</h3>
@@ -1387,7 +1442,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             a.click();
             window.URL.revokeObjectURL(url);
 
-            showNotification('✅ Excel file downloaded!', 'success');
+            showNotification('✅ Excel Downloaded!', 'success');
         }
 
         function saveProfile() {
