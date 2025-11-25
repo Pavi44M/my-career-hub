@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Hub - Job Application Tracker</title>
+    <title>Career Hub Pro - Complete Job Tracking System</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -123,6 +123,62 @@
             resize: vertical;
         }
 
+        .file-upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f8f9ff;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            background: #e8e9ff;
+            border-color: #5568d3;
+        }
+
+        .file-upload-area.has-file {
+            border-color: #28a745;
+            background: #e8f5e9;
+        }
+
+        .uploaded-files-list {
+            margin-top: 15px;
+        }
+
+        .uploaded-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .uploaded-file-item .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uploaded-file-item .file-icon {
+            font-size: 24px;
+        }
+
+        .uploaded-file-item .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -140,12 +196,30 @@
             transform: translateY(-2px);
         }
 
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
         .application-card {
             background: #f8f9fa;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 20px;
             border-left: 5px solid #667eea;
+            position: relative;
         }
 
         .application-card h3 {
@@ -173,7 +247,9 @@
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            float: right;
+            position: absolute;
+            top: 25px;
+            right: 25px;
         }
 
         .status-pending {
@@ -196,6 +272,11 @@
             color: #721c24;
         }
 
+        .status-offer {
+            background: #d1f2eb;
+            color: #0c5460;
+        }
+
         .match-score {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -204,6 +285,71 @@
             border-radius: 20px;
             font-weight: 600;
             margin: 10px 0;
+        }
+
+        .status-checks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .status-check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .status-check-item.completed {
+            background: #d4edda;
+        }
+
+        .status-check-item .check-icon {
+            font-size: 20px;
+        }
+
+        .status-check-item.completed .check-icon {
+            color: #28a745;
+        }
+
+        .timeline {
+            border-left: 3px solid #667eea;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -37px;
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .timeline-item.completed::before {
+            color: #28a745;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            color: #333;
+            font-weight: 600;
         }
 
         .action-buttons {
@@ -225,6 +371,11 @@
 
         .btn-view {
             background: #667eea;
+            color: white;
+        }
+
+        .btn-docs {
+            background: #17a2b8;
             color: white;
         }
 
@@ -273,15 +424,22 @@
             opacity: 0.9;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
+        .export-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
         }
 
-        .empty-state .icon {
-            font-size: 80px;
+        .export-section h3 {
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .modal {
@@ -291,7 +449,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -306,7 +464,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -337,6 +495,57 @@
             color: #333;
         }
 
+        .document-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 400px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .document-preview h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .document-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .doc-tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .doc-tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -346,12 +555,11 @@
                 padding: 20px;
             }
 
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .action-btn {
-                width: 100%;
+            .status-badge {
+                position: static;
+                display: block;
+                margin-bottom: 15px;
+                width: fit-content;
             }
         }
     </style>
@@ -359,16 +567,16 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Career Hub</h1>
-            <p>AI-Powered Job Application Tracker</p>
+            <h1>🚀 Career Hub Pro</h1>
+            <p>Complete Job Application Tracking & Document Management System</p>
         </div>
 
         <div class="main-content">
             <div class="tab-navigation">
                 <button class="tab-btn active" onclick="showTab('new-application')">➕ New Application</button>
                 <button class="tab-btn" onclick="showTab('my-applications')">📋 My Applications</button>
-                <button class="tab-btn" onclick="showTab('analytics')">📊 Analytics</button>
-                <button class="tab-btn" onclick="showTab('profile')">👤 My Profile</button>
+                <button class="tab-btn" onclick="showTab('analytics')">📊 Analytics & Export</button>
+                <button class="tab-btn" onclick="showTab('profile')">👤 My Profile & Documents</button>
             </div>
 
             <!-- New Application Tab -->
@@ -428,15 +636,54 @@
                 <div id="applicationsList"></div>
             </div>
 
-            <!-- Analytics Tab -->
+            <!-- Analytics & Export Tab -->
             <div id="analytics" class="tab-content">
                 <h2 style="margin-bottom: 30px;">Analytics Dashboard</h2>
                 <div class="analytics-grid" id="analyticsGrid"></div>
+
+                <div class="export-section">
+                    <h3>📥 Export Job Tracking Data</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Download your complete job application tracking data as Excel spreadsheet</p>
+                    <div class="export-buttons">
+                        <button onclick="exportToExcel()" class="btn-secondary" style="width: auto;">
+                            📊 Download Excel Tracker
+                        </button>
+                        <button onclick="exportToCSV()" class="btn-secondary" style="width: auto;">
+                            📄 Download CSV
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Profile Tab -->
+            <!-- Profile & Documents Tab -->
             <div id="profile" class="tab-content">
-                <h2 style="margin-bottom: 30px;">My Profile</h2>
+                <h2 style="margin-bottom: 30px;">My Profile & Master Documents</h2>
+                
+                <!-- Master Documents Upload Section -->
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 20px;">📄 Master Documents</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Upload your master CV and other profile documents. These will be used as templates for generating tailored application documents.</p>
+                    
+                    <div class="file-upload-area" id="cvUploadArea" onclick="document.getElementById('masterCV').click()">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+                        <h4>Upload Master CV</h4>
+                        <p style="color: #666; margin-top: 10px;">Click to upload or drag and drop</p>
+                        <p style="font-size: 12px; color: #999;">PDF, DOC, DOCX (Max 5MB)</p>
+                        <input type="file" id="masterCV" accept=".pdf,.doc,.docx" style="display: none;" onchange="handleMasterCVUpload(event)">
+                    </div>
+
+                    <div class="file-upload-area" id="otherDocsUploadArea" onclick="document.getElementById('otherDocs').click()">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📎</div>
+                        <h4>Upload Other Documents</h4>
+                        <p style="color: #666; margin-top: 10px;">Certificates, Portfolios, References, etc.</p>
+                        <p style="font-size: 12px; color: #999;">Multiple files allowed</p>
+                        <input type="file" id="otherDocs" multiple accept=".pdf,.doc,.docx" style="display: none;" onchange="handleOtherDocsUpload(event)">
+                    </div>
+
+                    <div id="uploadedDocsList" class="uploaded-files-list"></div>
+                </div>
+
+                <!-- Profile Form -->
                 <form id="profileForm" onsubmit="saveProfile(event)">
                     <div class="form-group">
                         <label>Full Name</label>
@@ -465,12 +712,12 @@
 
                     <div class="form-group">
                         <label>Skills (comma-separated)</label>
-                        <textarea id="profileSkills" placeholder="e.g., Advanced Excel, Power BI, SQL, Data Analysis, Python"></textarea>
+                        <textarea id="profileSkills" placeholder="e.g., Advanced Excel, Power BI, SQL, Data Analysis, Python" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Education</label>
-                        <textarea id="profileEducation" placeholder="Your degrees and certifications"></textarea>
+                        <textarea id="profileEducation" placeholder="Your degrees and certifications" rows="4"></textarea>
                     </div>
 
                     <button type="submit" class="btn-primary">💾 Save Profile</button>
@@ -484,22 +731,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Application Details</h2>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <button class="modal-close" onclick="closeModal('detailsModal')">&times;</button>
             </div>
             <div id="modalBody"></div>
         </div>
     </div>
 
+    <!-- Documents View Modal -->
+    <div id="documentsModal" class="modal">
+        <div class="modal-content" style="max-width: 1100px;">
+            <div class="modal-header">
+                <h2>📄 Application Documents</h2>
+                <button class="modal-close" onclick="closeModal('documentsModal')">&times;</button>
+            </div>
+            <div id="documentsModalBody"></div>
+        </div>
+    </div>
+
     <script>
-        // Initialize data structures
+        // Initialize data
         let applications = JSON.parse(localStorage.getItem('applications') || '[]');
         let userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+        let masterDocuments = JSON.parse(localStorage.getItem('masterDocuments') || '{}');
 
-        // Initialize on load
         window.onload = function() {
             loadProfile();
             loadApplications();
             updateAnalytics();
+            displayUploadedDocs();
         };
 
         // Tab navigation
@@ -514,25 +773,19 @@
                 loadApplications();
             } else if (tabName === 'analytics') {
                 updateAnalytics();
+            } else if (tabName === 'profile') {
+                displayUploadedDocs();
             }
         }
 
-        // Submit new application
+        // Submit application
         function submitApplication(event) {
             event.preventDefault();
 
-            const jobTitle = document.getElementById('jobTitle').value.trim();
-            const company = document.getElementById('companyName').value.trim();
-
-            if (!jobTitle || !company) {
-                alert('⚠️ Please fill in at least Job Title and Company Name');
-                return;
-            }
-
             const application = {
                 id: Date.now(),
-                jobTitle: jobTitle,
-                company: company,
+                jobTitle: document.getElementById('jobTitle').value.trim(),
+                company: document.getElementById('companyName').value.trim(),
                 reference: document.getElementById('jobRef').value,
                 location: document.getElementById('location').value,
                 deadline: document.getElementById('deadline').value,
@@ -542,22 +795,116 @@
                 matchScore: calculateMatchScore(document.getElementById('jobDescription').value),
                 dateAdded: new Date().toISOString(),
                 dateSubmitted: null,
+                dateResponse: null,
+                responseEmail: null,
+                interviewDate: null,
+                notes: '',
                 documents: {
-                    cv: null,
-                    coverLetter: null,
-                    email: null
+                    cv: generateCV(document.getElementById('jobTitle').value, document.getElementById('companyName').value),
+                    coverLetter: generateCoverLetter(document.getElementById('jobTitle').value, document.getElementById('companyName').value),
+                    email: generateEmail(document.getElementById('jobTitle').value, document.getElementById('companyName').value)
+                },
+                statusChecks: {
+                    cvGenerated: true,
+                    coverLetterGenerated: true,
+                    emailGenerated: true,
+                    applied: false,
+                    responseReceived: false,
+                    interviewScheduled: false
                 }
             };
 
             applications.push(application);
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            // Show success message
-            alert(`🎉 Application Added Successfully!\n\n${jobTitle} at ${company}\n🎯 Match Score: ${application.matchScore}%\n\nYou can now view it in "My Applications" tab.`);
+            alert(`🎉 Application Added!\n\n${application.jobTitle} at ${application.company}\n🎯 Match Score: ${application.matchScore}%\n\n✅ CV Generated\n✅ Cover Letter Generated\n✅ Email Draft Generated`);
             
             document.getElementById('applicationForm').reset();
             showTab('my-applications');
-            loadApplications();
+        }
+
+        // Generate CV (template)
+        function generateCV(jobTitle, company) {
+            return {
+                generated: true,
+                content: `PAVITHRA MADURANGA BAMUNU
+${userProfile.location || 'Auckland, New Zealand'}
+${userProfile.phone || '022 619 7626'} | ${userProfile.email || 'pavithrasam.s6@gmail.com'}
+${userProfile.linkedin || 'linkedin.com/in/pavithra-maduranga-19624675'}
+
+OBJECTIVE
+Seeking the position of ${jobTitle} at ${company}. Bringing ${userProfile.education || 'Master of Business Analytics'} and extensive experience in data analysis, merchandise planning, and retail operations.
+
+KEY SKILLS
+${userProfile.skills || 'Advanced Excel, Power BI, Data Analysis, SQL, Business Analytics'}
+
+EDUCATION
+${userProfile.education || 'Master of Business Analytics - Unitec Institute of Technology (Expected 2025)'}
+
+EXPERIENCE
+Supply Chain Data Analyst Intern - USL Medical (Mar 2025 - Jun 2025)
+Operations Attendant - PPCS (Nov 2024 - Jul 2025)
+Product Manager - Samsung Electronics (Jan 2015 - Jul 2024)
+
+This CV has been tailored for ${jobTitle} at ${company}.`
+            };
+        }
+
+        // Generate Cover Letter
+        function generateCoverLetter(jobTitle, company) {
+            return {
+                generated: true,
+                content: `${userProfile.name || 'Pavithra Maduranga Bamunu'}
+${userProfile.location || 'Auckland, New Zealand'}
+${userProfile.email || 'pavithrasam.s6@gmail.com'}
+${userProfile.phone || '022 619 7626'}
+
+${new Date().toLocaleDateString()}
+
+Hiring Manager
+${company}
+
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the ${jobTitle} position at ${company}. With my background in ${userProfile.education || 'Business Analytics'} and proven experience in data analysis and retail operations, I am confident in my ability to contribute effectively to your team.
+
+My recent experience as a Supply Chain Data Analyst Intern at USL Medical has equipped me with practical skills in data analysis, inventory management, and compliance procedures. Combined with my Master of Business Analytics from Unitec, I bring both theoretical knowledge and hands-on expertise to this role.
+
+I am particularly drawn to ${company} because of your reputation for excellence and innovation. I am excited about the opportunity to apply my analytical skills and contribute to your continued success.
+
+I would welcome the opportunity to discuss how my background and skills align with your needs. Thank you for considering my application.
+
+Sincerely,
+${userProfile.name || 'Pavithra Maduranga Bamunu'}`
+            };
+        }
+
+        // Generate Email Draft
+        function generateEmail(jobTitle, company) {
+            return {
+                generated: true,
+                content: `Subject: Application for ${jobTitle} Position
+
+Dear Hiring Manager,
+
+I am writing to apply for the ${jobTitle} position at ${company}. Please find attached my CV and cover letter for your consideration.
+
+With my background in ${userProfile.education || 'Business Analytics'} and relevant experience in data analysis and retail operations, I am confident I would be a valuable addition to your team.
+
+Key highlights of my qualifications:
+• ${userProfile.education || 'Master of Business Analytics (Expected 2025)'}
+• Experience in data analysis and supply chain management
+• Proficient in ${(userProfile.skills || 'Excel, Power BI, SQL').split(',').slice(0,3).join(', ')}
+
+I am available for an interview at your convenience and look forward to discussing this opportunity further.
+
+Thank you for your consideration.
+
+Best regards,
+${userProfile.name || 'Pavithra Maduranga Bamunu'}
+${userProfile.phone || '022 619 7626'}
+${userProfile.email || 'pavithrasam.s6@gmail.com'}`
+            };
         }
 
         // Calculate match score
@@ -584,7 +931,7 @@
             return Math.min(Math.round(score), 95);
         }
 
-        // Load and display applications
+        // Load applications
         function loadApplications() {
             const container = document.getElementById('applicationsList');
             
@@ -604,14 +951,69 @@
                     <span class="status-badge status-${app.status}">${app.status}</span>
                     <h3>${app.jobTitle}</h3>
                     <div class="company">${app.company}</div>
+                    
                     ${app.location ? `<div class="info">📍 ${app.location}</div>` : ''}
                     ${app.deadline ? `<div class="info">⏰ Deadline: ${new Date(app.deadline).toLocaleDateString()}</div>` : ''}
+                    
                     <div class="match-score">🎯 Match Score: ${app.matchScore}%</div>
-                    <div class="info">Added: ${new Date(app.dateAdded).toLocaleDateString()} ${app.reference ? `| Ref: ${app.reference}` : ''}</div>
+                    
+                    <div class="status-checks">
+                        <div class="status-check-item ${app.statusChecks.cvGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.cvGenerated ? '✅' : '⏳'}</span>
+                            <span>CV Generated</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.coverLetterGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.coverLetterGenerated ? '✅' : '⏳'}</span>
+                            <span>Cover Letter</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.emailGenerated ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.emailGenerated ? '✅' : '⏳'}</span>
+                            <span>Email Draft</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.applied ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.applied ? '✅' : '❌'}</span>
+                            <span>Applied</span>
+                        </div>
+                        <div class="status-check-item ${app.statusChecks.responseReceived ? 'completed' : ''}">
+                            <span class="check-icon">${app.statusChecks.responseReceived ? '✅' : '❌'}</span>
+                            <span>Response</span>
+                        </div>
+                    </div>
+
+                    ${app.dateSubmitted || app.dateResponse ? `
+                        <div class="timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-date">${new Date(app.dateAdded).toLocaleString()}</div>
+                                <div class="timeline-content">Application Created</div>
+                            </div>
+                            ${app.dateSubmitted ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.dateSubmitted).toLocaleString()}</div>
+                                    <div class="timeline-content">✅ Application Submitted</div>
+                                </div>
+                            ` : ''}
+                            ${app.dateResponse ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.dateResponse).toLocaleString()}</div>
+                                    <div class="timeline-content">📧 Response Received</div>
+                                </div>
+                            ` : ''}
+                            ${app.interviewDate ? `
+                                <div class="timeline-item completed">
+                                    <div class="timeline-date">${new Date(app.interviewDate).toLocaleString()}</div>
+                                    <div class="timeline-content">🎯 Interview Scheduled</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="info" style="margin-top: 10px;">Added: ${new Date(app.dateAdded).toLocaleDateString()} ${app.reference ? `| Ref: ${app.reference}` : ''}</div>
                     
                     <div class="action-buttons">
                         <button class="action-btn btn-view" onclick="viewDetails(${app.id})">👁️ View Details</button>
-                        <button class="action-btn btn-download" onclick="downloadDocs(${app.id})">📥 Download Docs</button>
+                        <button class="action-btn btn-docs" onclick="viewDocuments(${app.id})">📄 View Documents</button>
+                        <button class="action-btn btn-download" onclick="downloadDocs(${app.id})">📥 Download All</button>
+                        <button class="action-btn btn-edit" onclick="markAsApplied(${app.id})">✅ Mark as Applied</button>
                         <button class="action-btn btn-edit" onclick="editApplication(${app.id})">✏️ Edit</button>
                         <button class="action-btn btn-delete" onclick="deleteApplication(${app.id})">🗑️ Delete</button>
                     </div>
@@ -619,7 +1021,99 @@
             `).join('');
         }
 
-        // View application details
+        // View documents
+        function viewDocuments(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            const modal = document.getElementById('documentsModal');
+            const modalBody = document.getElementById('documentsModalBody');
+
+            modalBody.innerHTML = `
+                <div class="document-tabs">
+                    <button class="doc-tab-btn active" onclick="showDocument(${id}, 'cv')">📄 CV</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'coverLetter')">📝 Cover Letter</button>
+                    <button class="doc-tab-btn" onclick="showDocument(${id}, 'email')">📧 Email Draft</button>
+                </div>
+                <div class="document-preview" id="documentPreview">
+                    <h4>Tailored CV for ${app.jobTitle} at ${app.company}</h4>
+                    <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.6;">${app.documents.cv.content}</pre>
+                </div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button onclick="downloadSingleDoc(${id}, 'cv')" class="btn-secondary">📥 Download CV</button>
+                    <button onclick="downloadSingleDoc(${id}, 'coverLetter')" class="btn-secondary">📥 Download Cover Letter</button>
+                    <button onclick="downloadSingleDoc(${id}, 'email')" class="btn-secondary">📥 Download Email</button>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Show document
+        function showDocument(id, type) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            document.querySelectorAll('.doc-tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const preview = document.getElementById('documentPreview');
+            const titles = {
+                cv: `Tailored CV for ${app.jobTitle} at ${app.company}`,
+                coverLetter: `Cover Letter for ${app.jobTitle} at ${app.company}`,
+                email: `Email Draft for ${app.jobTitle} at ${app.company}`
+            };
+
+            preview.innerHTML = `
+                <h4>${titles[type]}</h4>
+                <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.6;">${app.documents[type].content}</pre>
+            `;
+        }
+
+        // Download single document
+        function downloadSingleDoc(id, type) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            const content = app.documents[type].content;
+            const filename = `${app.company}_${app.jobTitle.replace(/\s+/g, '_')}_${type}.txt`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+            alert(`✅ ${type.toUpperCase()} downloaded as ${filename}`);
+        }
+
+        // Download all docs
+        function downloadDocs(id) {
+            downloadSingleDoc(id, 'cv');
+            setTimeout(() => downloadSingleDoc(id, 'coverLetter'), 500);
+            setTimeout(() => downloadSingleDoc(id, 'email'), 1000);
+        }
+
+        // Mark as applied
+        function markAsApplied(id) {
+            const appIndex = applications.findIndex(a => a.id === id);
+            if (appIndex === -1) return;
+
+            const currentDate = new Date().toISOString();
+            applications[appIndex].status = 'submitted';
+            applications[appIndex].dateSubmitted = currentDate;
+            applications[appIndex].statusChecks.applied = true;
+
+            localStorage.setItem('applications', JSON.stringify(applications));
+            
+            alert(`✅ Marked as Applied!\n\nDate: ${new Date(currentDate).toLocaleString()}\n\nYou can now track when you receive a response.`);
+            loadApplications();
+            updateAnalytics();
+        }
+
+        // View details
         function viewDetails(id) {
             const app = applications.find(a => a.id === id);
             if (!app) return;
@@ -628,19 +1122,52 @@
             const modalBody = document.getElementById('modalBody');
 
             modalBody.innerHTML = `
-                <div style="margin-bottom: 20px;">
+                <div>
                     <h3 style="color: #667eea; margin-bottom: 10px;">${app.jobTitle}</h3>
                     <h4 style="color: #666; margin-bottom: 20px;">${app.company}</h4>
                     
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <strong>Status:</strong> <span style="text-transform: uppercase; color: #667eea;">${app.status}</span><br>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <strong>Status:</strong> <span style="text-transform: uppercase; color: #667eea; font-weight: 600;">${app.status}</span><br><br>
                         <strong>Match Score:</strong> ${app.matchScore}%<br>
                         ${app.location ? `<strong>Location:</strong> ${app.location}<br>` : ''}
                         ${app.reference ? `<strong>Reference:</strong> ${app.reference}<br>` : ''}
                         ${app.deadline ? `<strong>Deadline:</strong> ${new Date(app.deadline).toLocaleDateString()}<br>` : ''}
                         <strong>Source:</strong> ${app.source}<br>
-                        <strong>Date Added:</strong> ${new Date(app.dateAdded).toLocaleDateString()}<br>
-                        ${app.dateSubmitted ? `<strong>Date Submitted:</strong> ${new Date(app.dateSubmitted).toLocaleDateString()}<br>` : ''}
+                        <strong>Date Added:</strong> ${new Date(app.dateAdded).toLocaleString()}<br>
+                        ${app.dateSubmitted ? `<strong>Date Submitted:</strong> ${new Date(app.dateSubmitted).toLocaleString()}<br>` : ''}
+                        ${app.dateResponse ? `<strong>Response Received:</strong> ${new Date(app.dateResponse).toLocaleString()}<br>` : ''}
+                        ${app.interviewDate ? `<strong>Interview Date:</strong> ${new Date(app.interviewDate).toLocaleString()}<br>` : ''}
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="display: block; margin-bottom: 10px;"><strong>Update Status:</strong></label>
+                        <select id="statusUpdate" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+                            <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="submitted" ${app.status === 'submitted' ? 'selected' : ''}>Submitted</option>
+                            <option value="interview" ${app.status === 'interview' ? 'selected' : ''}>Interview</option>
+                            <option value="offer" ${app.status === 'offer' ? 'selected' : ''}>Offer Received</option>
+                            <option value="rejected" ${app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                        </select>
+
+                        ${!app.dateResponse ? `
+                            <label style="display: block; margin-bottom: 10px;"><strong>Mark Response Received:</strong></label>
+                            <button onclick="markResponseReceived(${app.id})" class="btn-secondary" style="width: 100%; margin-bottom: 15px;">
+                                📧 Mark Response Received (Now)
+                            </button>
+                        ` : ''}
+
+                        ${app.status === 'interview' && !app.interviewDate ? `
+                            <label style="display: block; margin-bottom: 10px;"><strong>Interview Date:</strong></label>
+                            <input type="datetime-local" id="interviewDate" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+                            <button onclick="setInterviewDate(${app.id})" class="btn-secondary" style="width: 100%; margin-bottom: 15px;">
+                                📅 Set Interview Date
+                            </button>
+                        ` : ''}
+
+                        <label style="display: block; margin-bottom: 10px;"><strong>Notes:</strong></label>
+                        <textarea id="appNotes" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; min-height: 100px; margin-bottom: 15px;">${app.notes || ''}</textarea>
+
+                        <button onclick="updateApplication(${app.id})" class="btn-primary">💾 Update Application</button>
                     </div>
 
                     ${app.description ? `
@@ -649,49 +1176,67 @@
                             <div style="background: white; padding: 15px; border: 2px solid #eee; border-radius: 8px; max-height: 300px; overflow-y: auto; white-space: pre-wrap;">${app.description}</div>
                         </div>
                     ` : ''}
-
-                    <div style="margin-top: 20px;">
-                        <label style="display: block; margin-bottom: 10px;"><strong>Update Status:</strong></label>
-                        <select id="statusUpdate" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px;">
-                            <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>Pending</option>
-                            <option value="submitted" ${app.status === 'submitted' ? 'selected' : ''}>Submitted</option>
-                            <option value="interview" ${app.status === 'interview' ? 'selected' : ''}>Interview</option>
-                            <option value="rejected" ${app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
-                        </select>
-                        <button onclick="updateStatus(${app.id})" class="btn-primary" style="margin-top: 15px;">💾 Update Status</button>
-                    </div>
                 </div>
             `;
 
             modal.classList.add('active');
         }
 
-        // Update application status
-        function updateStatus(id) {
-            const newStatus = document.getElementById('statusUpdate').value;
+        // Mark response received
+        function markResponseReceived(id) {
             const appIndex = applications.findIndex(a => a.id === id);
+            if (appIndex === -1) return;
+
+            applications[appIndex].dateResponse = new Date().toISOString();
+            applications[appIndex].statusChecks.responseReceived = true;
             
-            if (appIndex !== -1) {
-                applications[appIndex].status = newStatus;
-                
-                if (newStatus === 'submitted' && !applications[appIndex].dateSubmitted) {
-                    applications[appIndex].dateSubmitted = new Date().toISOString();
-                }
-                
-                localStorage.setItem('applications', JSON.stringify(applications));
-                alert('✅ Status updated successfully!');
-                closeModal();
-                loadApplications();
-                updateAnalytics();
-            }
+            localStorage.setItem('applications', JSON.stringify(applications));
+            alert('✅ Response marked as received!');
+            closeModal('detailsModal');
+            loadApplications();
         }
 
-        // Download documents (placeholder)
-        function downloadDocs(id) {
-            const app = applications.find(a => a.id === id);
-            if (!app) return;
+        // Set interview date
+        function setInterviewDate(id) {
+            const appIndex = applications.findIndex(a => a.id === id);
+            if (appIndex === -1) return;
 
-            alert(`📥 Document Download\n\nIn the full version, this would download:\n✓ Tailored CV\n✓ Custom Cover Letter\n✓ Email Draft\n\nFor: ${app.jobTitle} at ${app.company}\n\nCurrently, these documents would need to be generated using the AI features (Phase 2).`);
+            const interviewDate = document.getElementById('interviewDate').value;
+            if (!interviewDate) {
+                alert('Please select an interview date and time');
+                return;
+            }
+
+            applications[appIndex].interviewDate = new Date(interviewDate).toISOString();
+            applications[appIndex].statusChecks.interviewScheduled = true;
+            
+            localStorage.setItem('applications', JSON.stringify(applications));
+            alert('✅ Interview date set!');
+            closeModal('detailsModal');
+            loadApplications();
+        }
+
+        // Update application
+        function updateApplication(id) {
+            const appIndex = applications.findIndex(a => a.id === id);
+            if (appIndex === -1) return;
+
+            const newStatus = document.getElementById('statusUpdate').value;
+            const notes = document.getElementById('appNotes').value;
+
+            applications[appIndex].status = newStatus;
+            applications[appIndex].notes = notes;
+            
+            if (newStatus === 'submitted' && !applications[appIndex].dateSubmitted) {
+                applications[appIndex].dateSubmitted = new Date().toISOString();
+                applications[appIndex].statusChecks.applied = true;
+            }
+
+            localStorage.setItem('applications', JSON.stringify(applications));
+            alert('✅ Application updated!');
+            closeModal('detailsModal');
+            loadApplications();
+            updateAnalytics();
         }
 
         // Edit application
@@ -699,7 +1244,6 @@
             const app = applications.find(a => a.id === id);
             if (!app) return;
 
-            // Switch to new application tab and fill form
             document.getElementById('jobTitle').value = app.jobTitle;
             document.getElementById('companyName').value = app.company;
             document.getElementById('jobRef').value = app.reference || '';
@@ -708,12 +1252,11 @@
             document.getElementById('jobDescription').value = app.description || '';
             document.getElementById('source').value = app.source;
 
-            // Delete old application
             applications = applications.filter(a => a.id !== id);
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            showTab('new-application');
-            alert('✏️ Application loaded for editing. Make your changes and submit.');
+            document.querySelectorAll('.tab-btn')[0].click();
+            alert('✏️ Application loaded for editing. Make changes and submit.');
         }
 
         // Delete application
@@ -721,18 +1264,13 @@
             const app = applications.find(a => a.id === id);
             if (!app) return;
 
-            if (confirm(`🗑️ Delete Application?\n\nAre you sure you want to delete:\n${app.jobTitle} at ${app.company}?\n\nThis cannot be undone.`)) {
+            if (confirm(`Delete Application?\n\n${app.jobTitle} at ${app.company}\n\nThis cannot be undone.`)) {
                 applications = applications.filter(a => a.id !== id);
                 localStorage.setItem('applications', JSON.stringify(applications));
-                alert('✅ Application deleted successfully!');
+                alert('✅ Deleted!');
                 loadApplications();
                 updateAnalytics();
             }
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('detailsModal').classList.remove('active');
         }
 
         // Update analytics
@@ -744,7 +1282,7 @@
                     <div class="empty-state" style="grid-column: 1/-1;">
                         <div class="icon">📊</div>
                         <h3>No Data Yet</h3>
-                        <p>Analytics will appear once you add applications!</p>
+                        <p>Add applications to see analytics!</p>
                     </div>
                 `;
                 return;
@@ -752,18 +1290,25 @@
 
             const total = applications.length;
             const avgMatch = Math.round(applications.reduce((sum, app) => sum + app.matchScore, 0) / total);
-            const interviewed = applications.filter(app => app.status === 'interview').length;
-            const interviewRate = total > 0 ? Math.round((interviewed / total) * 100) : 0;
+            const interviewed = applications.filter(app => app.status === 'interview' || app.status === 'offer').length;
+            const interviewRate = Math.round((interviewed / total) * 100);
             
             const submitted = applications.filter(app => app.dateSubmitted);
-            const responseTimes = submitted.map(app => {
-                const submitDate = new Date(app.dateSubmitted);
-                const now = new Date();
-                return Math.floor((now - submitDate) / (1000 * 60 * 60 * 24));
-            });
-            const avgResponse = responseTimes.length > 0 
-                ? Math.round(responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length) 
-                : 0;
+            const responses = applications.filter(app => app.dateResponse);
+            
+            let avgResponse = 0;
+            if (responses.length > 0) {
+                const responseTimes = responses.map(app => {
+                    const submitDate = new Date(app.dateSubmitted);
+                    const responseDate = new Date(app.dateResponse);
+                    return Math.floor((responseDate - submitDate) / (1000 * 60 * 60 * 24));
+                });
+                avgResponse = Math.round(responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length);
+            }
+
+            const pending = applications.filter(app => app.status === 'pending').length;
+            const submittedCount = applications.filter(app => app.status === 'submitted').length;
+            const offers = applications.filter(app => app.status === 'offer').length;
 
             container.innerHTML = `
                 <div class="stat-card">
@@ -772,7 +1317,7 @@
                 </div>
                 <div class="stat-card">
                     <h3>${avgMatch}%</h3>
-                    <p>Average Match Score</p>
+                    <p>Avg Match Score</p>
                 </div>
                 <div class="stat-card">
                     <h3>${interviewRate}%</h3>
@@ -780,20 +1325,239 @@
                 </div>
                 <div class="stat-card">
                     <h3>${avgResponse}</h3>
-                    <p>Avg Response Time (days)</p>
+                    <p>Avg Response (days)</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${pending}</h3>
+                    <p>Pending</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${submittedCount}</h3>
+                    <p>Submitted</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${interviewed}</h3>
+                    <p>Interviews</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${offers}</h3>
+                    <p>Offers</p>
                 </div>
             `;
         }
 
-        // Load profile
-        function loadProfile() {
-            document.getElementById('profileName').value = userProfile.name || '';
-            document.getElementById('profileEmail').value = userProfile.email || '';
-            document.getElementById('profilePhone').value = userProfile.phone || '';
-            document.getElementById('profileLocation').value = userProfile.location || '';
-            document.getElementById('profileLinkedIn').value = userProfile.linkedin || '';
-            document.getElementById('profileSkills').value = userProfile.skills || '';
-            document.getElementById('profileEducation').value = userProfile.education || '';
+        // Export to Excel (CSV format - opens in Excel)
+        function exportToExcel() {
+            if (applications.length === 0) {
+                alert('No applications to export!');
+                return;
+            }
+
+            const headers = [
+                'Job Title',
+                'Company',
+                'Reference',
+                'Location',
+                'Source',
+                'Status',
+                'Match Score (%)',
+                'Deadline',
+                'Date Added',
+                'Date Submitted',
+                'Date Response',
+                'Interview Date',
+                'Days Since Applied',
+                'Response Time (days)',
+                'CV Generated',
+                'Cover Letter Generated',
+                'Email Generated',
+                'Applied',
+                'Response Received',
+                'Notes'
+            ];
+
+            const rows = applications.map(app => {
+                const daysSinceApplied = app.dateSubmitted 
+                    ? Math.floor((new Date() - new Date(app.dateSubmitted)) / (1000 * 60 * 60 * 24))
+                    : '';
+                
+                const responseTime = (app.dateSubmitted && app.dateResponse)
+                    ? Math.floor((new Date(app.dateResponse) - new Date(app.dateSubmitted)) / (1000 * 60 * 60 * 24))
+                    : '';
+
+                return [
+                    app.jobTitle,
+                    app.company,
+                    app.reference || '',
+                    app.location || '',
+                    app.source,
+                    app.status.toUpperCase(),
+                    app.matchScore,
+                    app.deadline ? new Date(app.deadline).toLocaleDateString() : '',
+                    new Date(app.dateAdded).toLocaleString(),
+                    app.dateSubmitted ? new Date(app.dateSubmitted).toLocaleString() : '',
+                    app.dateResponse ? new Date(app.dateResponse).toLocaleString() : '',
+                    app.interviewDate ? new Date(app.interviewDate).toLocaleString() : '',
+                    daysSinceApplied,
+                    responseTime,
+                    app.statusChecks.cvGenerated ? 'YES' : 'NO',
+                    app.statusChecks.coverLetterGenerated ? 'YES' : 'NO',
+                    app.statusChecks.emailGenerated ? 'YES' : 'NO',
+                    app.statusChecks.applied ? 'YES' : 'NO',
+                    app.statusChecks.responseReceived ? 'YES' : 'NO',
+                    app.notes || ''
+                ].map(cell => {
+                    // Escape quotes and wrap in quotes if contains comma
+                    const cellStr = String(cell).replace(/"/g, '""');
+                    return cellStr.includes(',') ? `"${cellStr}"` : cellStr;
+                });
+            });
+
+            const csv = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Job_Applications_Tracker_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            window.URL.revokeObjectURL(url);
+
+            alert('✅ Excel tracker downloaded!\n\nOpen with Microsoft Excel or Google Sheets.\n\nFile includes all application data, timestamps, and tracking information.');
+        }
+
+        // Export to CSV (same as Excel for this version)
+        function exportToCSV() {
+            exportToExcel();
+        }
+
+        // Handle master CV upload
+        function handleMasterCVUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File too large! Maximum size is 5MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                masterDocuments.masterCV = {
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    data: e.target.result,
+                    uploadDate: new Date().toISOString()
+                };
+                
+                localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
+                document.getElementById('cvUploadArea').classList.add('has-file');
+                alert('✅ Master CV uploaded successfully!');
+                displayUploadedDocs();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Handle other docs upload
+        function handleOtherDocsUpload(event) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+
+            if (!masterDocuments.otherDocs) {
+                masterDocuments.otherDocs = [];
+            }
+
+            files.forEach(file => {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(`${file.name} is too large! Maximum size is 5MB.`);
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    masterDocuments.otherDocs.push({
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    });
+                    
+                    localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
+                    document.getElementById('otherDocsUploadArea').classList.add('has-file');
+                    displayUploadedDocs();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            alert(`✅ ${files.length} document(s) uploaded!`);
+        }
+
+        // Display uploaded documents
+        function displayUploadedDocs() {
+            const container = document.getElementById('uploadedDocsList');
+            if (!container) return;
+
+            let html = '';
+
+            if (masterDocuments.masterCV) {
+                html += `
+                    <div class="uploaded-file-item">
+                        <div class="file-info">
+                            <span class="file-icon">📄</span>
+                            <div>
+                                <strong>Master CV:</strong> ${masterDocuments.masterCV.name}<br>
+                                <small style="color: #999;">Uploaded: ${new Date(masterDocuments.masterCV.uploadDate).toLocaleString()}</small>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeMasterCV()">Remove</button>
+                    </div>
+                `;
+            }
+
+            if (masterDocuments.otherDocs && masterDocuments.otherDocs.length > 0) {
+                masterDocuments.otherDocs.forEach((doc, index) => {
+                    html += `
+                        <div class="uploaded-file-item">
+                            <div class="file-info">
+                                <span class="file-icon">📎</span>
+                                <div>
+                                    <strong>${doc.name}</strong><br>
+                                    <small style="color: #999;">Uploaded: ${new Date(doc.uploadDate).toLocaleString()}</small>
+                                </div>
+                            </div>
+                            <button class="remove-btn" onclick="removeOtherDoc(${index})">Remove</button>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = html || '<p style="text-align: center; color: #999; padding: 20px;">No documents uploaded yet</p>';
+        }
+
+        // Remove master CV
+        function removeMasterCV() {
+            if (confirm('Remove master CV?')) {
+                delete masterDocuments.masterCV;
+                localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
+                document.getElementById('cvUploadArea').classList.remove('has-file');
+                displayUploadedDocs();
+                alert('✅ Master CV removed');
+            }
+        }
+
+        // Remove other document
+        function removeOtherDoc(index) {
+            if (confirm('Remove this document?')) {
+                masterDocuments.otherDocs.splice(index, 1);
+                localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
+                if (masterDocuments.otherDocs.length === 0) {
+                    document.getElementById('otherDocsUploadArea').classList.remove('has-file');
+                }
+                displayUploadedDocs();
+                alert('✅ Document removed');
+            }
         }
 
         // Save profile
@@ -812,22 +1576,39 @@
 
             localStorage.setItem('userProfile', JSON.stringify(userProfile));
             
-            // Recalculate all match scores
             applications.forEach(app => {
                 app.matchScore = calculateMatchScore(app.description);
             });
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            alert('✅ Profile saved successfully!\n\n💡 Your match scores have been recalculated based on your updated profile.');
+            alert('✅ Profile saved!\n\n💡 Match scores recalculated based on your updated profile.');
             loadApplications();
             updateAnalytics();
         }
 
-        // Close modal when clicking outside
-        document.getElementById('detailsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Load profile
+        function loadProfile() {
+            document.getElementById('profileName').value = userProfile.name || '';
+            document.getElementById('profileEmail').value = userProfile.email || '';
+            document.getElementById('profilePhone').value = userProfile.phone || '';
+            document.getElementById('profileLocation').value = userProfile.location || '';
+            document.getElementById('profileLinkedIn').value = userProfile.linkedin || '';
+            document.getElementById('profileSkills').value = userProfile.skills || '';
+            document.getElementById('profileEducation').value = userProfile.education || '';
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
         });
     </script>
 </body>
