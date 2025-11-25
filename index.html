@@ -575,6 +575,10 @@
             max-width: 400px;
         }
 
+        .notification.error {
+            background: #dc3545;
+        }
+
         @keyframes slideIn {
             from { transform: translateX(400px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -621,6 +625,7 @@
                     <p style="margin-bottom: 15px; opacity: 0.9;">Enter your Anthropic API key to enable AI-powered document generation.</p>
                     <input type="password" id="apiKeyInput" placeholder="sk-ant-api..." value="">
                     <button onclick="saveApiKey()">💾 Save API Key</button>
+                    <button onclick="testApiKey()" style="margin-left: 10px; background: #17a2b8;">🧪 Test API Key</button>
                     <p style="margin-top: 15px; font-size: 13px; opacity: 0.8;">
                         Don't have a key? Get one at: <a href="https://console.anthropic.com/" target="_blank" style="color: white; text-decoration: underline;">console.anthropic.com</a>
                     </p>
@@ -637,18 +642,6 @@
                         <li>Much cheaper than resume writing services ($100-500)</li>
                     </ul>
                 </div>
-
-                <div style="background: #e8f4f8; padding: 30px; border-radius: 12px; margin-top: 20px;">
-                    <h3 style="margin-bottom: 15px; color: #0277bd;">🤖 What AI Does</h3>
-                    <ul style="color: #666; padding-left: 20px;">
-                        <li><strong>Analyzes job descriptions</strong> - Understands requirements</li>
-                        <li><strong>Writes custom cover letters</strong> - 4 professional paragraphs</li>
-                        <li><strong>Tailors your CV</strong> - Highlights relevant experience</li>
-                        <li><strong>Creates smart emails</strong> - Ready to send</li>
-                        <li><strong>Calculates real match scores</strong> - AI-powered analysis</li>
-                        <li><strong>Provides insights</strong> - "Highlight this skill..."</li>
-                    </ul>
-                </div>
             </div>
 
             <!-- New Application Tab -->
@@ -659,6 +652,7 @@
                     <div class="spinner"></div>
                     <h3>🤖 AI is Analyzing Job...</h3>
                     <p>Writing personalized cover letter and tailoring your CV...</p>
+                    <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">This may take 5-10 seconds...</p>
                 </div>
 
                 <div class="upload-section" id="pdfUploadSection" onclick="document.getElementById('pdfUpload').click()">
@@ -872,10 +866,49 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             if (input && input.startsWith('sk-ant-api')) {
                 apiKey = input;
                 localStorage.setItem('anthropicApiKey', apiKey);
-                showNotification('✅ API Key Saved!<br><br>AI-powered generation enabled! 🤖');
+                showNotification('✅ API Key Saved!<br><br>AI-powered generation enabled! 🤖', 'success');
                 checkApiKey();
             } else {
-                alert('Please enter a valid Anthropic API key (starts with sk-ant-api...)');
+                showNotification('❌ Please enter a valid Anthropic API key (starts with sk-ant-api...)', 'error');
+            }
+        }
+
+        async function testApiKey() {
+            if (!apiKey) {
+                showNotification('❌ Please save your API key first!', 'error');
+                return;
+            }
+
+            showNotification('🧪 Testing API key...', 'success');
+
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey,
+                        'anthropic-version': '2023-06-01'
+                    },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 50,
+                        messages: [{
+                            role: 'user',
+                            content: 'Say "API key is working!" in 5 words or less.'
+                        }]
+                    })
+                });
+
+                if (response.ok) {
+                    showNotification('✅ API Key Works!<br><br>Ready to generate AI documents! 🤖', 'success');
+                } else {
+                    const error = await response.json();
+                    console.error('API Error:', error);
+                    showNotification(`❌ API Error: ${error.error?.message || 'Invalid key'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Test Error:', error);
+                showNotification('❌ Connection error. Check your internet.', 'error');
             }
         }
 
@@ -893,12 +926,12 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
             else if (tabName === 'analytics') updateAnalytics();
         }
 
-        function showNotification(message) {
+        function showNotification(message, type = 'success') {
             const notif = document.createElement('div');
-            notif.className = 'notification';
+            notif.className = 'notification' + (type === 'error' ? ' error' : '');
             notif.innerHTML = message;
             document.body.appendChild(notif);
-            setTimeout(() => notif.remove(), 3000);
+            setTimeout(() => notif.remove(), type === 'error' ? 5000 : 3000);
         }
 
         async function handlePDFUpload(event) {
@@ -926,28 +959,24 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                 document.getElementById('pdfExtractInfo').style.display = 'block';
                 document.getElementById('pdfFileName').textContent = `File: ${file.name}`;
                 
-                showNotification('✅ PDF uploaded and analyzed!');
+                showNotification('✅ PDF uploaded and analyzed!', 'success');
             } catch (error) {
                 console.error('❌ PDF error:', error);
-                showNotification('⚠️ Could not extract PDF. Please fill manually.');
+                showNotification('⚠️ Could not extract PDF. Please fill manually.', 'error');
             }
         }
 
         function extractJobInfo(text) {
-            // Extract title
             const titleMatch = text.match(/(?:position|job title|role|seeking)[:\s]+([^\n]{10,100})/i);
             if (titleMatch) document.getElementById('jobTitle').value = titleMatch[1].trim();
 
-            // Extract company
             const companyMatch = text.match(/(?:company|organization|employer)[:\s]+([^\n]{3,80})/i);
             if (companyMatch) document.getElementById('companyName').value = companyMatch[1].trim();
 
-            // Extract location
             const locationMatch = text.match(/(?:location|based in)[:\s]+([^\n]{5,80})/i) || 
                                  text.match(/(Auckland|Wellington|Christchurch|Hamilton)[,\s]+New Zealand/i);
             if (locationMatch) document.getElementById('location').value = locationMatch[1] || locationMatch[0];
 
-            // Extract reference
             const refMatch = text.match(/(?:ref|reference|job\s+id)[:\s#]+([A-Z0-9_-]+)/i);
             if (refMatch) document.getElementById('jobRef').value = refMatch[1];
 
@@ -956,13 +985,13 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
 
         async function submitApplication() {
             if (!apiKey) {
-                alert('⚠️ Please configure your API key first!\n\nGo to AI Settings tab and enter your Anthropic API key.');
+                showNotification('⚠️ Please configure your API key first!<br><br>Go to AI Settings tab and enter your Anthropic API key.', 'error');
                 switchTab('api-settings');
                 return;
             }
 
             if (!userProfile.name || !userProfile.email) {
-                alert('⚠️ Please complete your profile first!\n\nGo to My Profile tab and fill in your information.');
+                showNotification('⚠️ Please complete your profile first!<br><br>Go to My Profile tab and fill in your information.', 'error');
                 switchTab('profile');
                 return;
             }
@@ -980,8 +1009,9 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
                 const jobDescription = document.getElementById('jobDescription').value.trim();
 
                 console.log('🤖 Calling Claude API...');
+                console.log('API Key length:', apiKey.length);
+                console.log('API Key starts with:', apiKey.substring(0, 15));
 
-                // Generate documents with AI
                 const documents = await generateAIDocuments(jobTitle, company, jobDescription);
                 
                 const application = {
@@ -1018,7 +1048,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
 
                 console.log('✅ Application created with AI documents');
 
-                showNotification(`🎉 AI-Generated Application Added!<br><br><strong>${jobTitle}</strong><br>${company}<br>🎯 Match: ${documents.matchScore}%`);
+                showNotification(`🎉 AI-Generated Application Added!<br><br><strong>${jobTitle}</strong><br>${company}<br>🎯 Match: ${documents.matchScore}%`, 'success');
                 
                 document.getElementById('applicationForm').reset();
                 document.getElementById('pdfUploadSection').classList.remove('has-file');
@@ -1028,7 +1058,7 @@ Executive Master of Project Management - Asia e University (2018)" rows="4"></te
 
             } catch (error) {
                 console.error('❌ Error:', error);
-                showNotification('❌ Error generating documents. Check API key and try again.');
+                showNotification(`❌ Error: ${error.message}<br><br>Check API key in AI Settings.`, 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('loading');
@@ -1073,6 +1103,8 @@ TASK: Generate 3 documents in JSON format:
 Generate ONLY the JSON object. No other text. Make it professional, personalized, and specific to this job.`;
 
             try {
+                console.log('📡 Sending request to Anthropic API...');
+                
                 const response = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
                     headers: {
@@ -1082,7 +1114,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     },
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
-                        max_tokens: 2000,
+                        max_tokens: 2500,
                         messages: [{
                             role: 'user',
                             content: prompt
@@ -1090,8 +1122,12 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                     })
                 });
 
+                console.log('📥 Response status:', response.status);
+
                 if (!response.ok) {
-                    throw new Error(`API error: ${response.status}`);
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(errorData.error?.message || `API returned status ${response.status}`);
                 }
 
                 const data = await response.json();
@@ -1111,8 +1147,8 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
                 };
 
             } catch (error) {
-                console.error('❌ API Error:', error);
-                throw error;
+                console.error('❌ API Error Details:', error);
+                throw new Error(`API call failed: ${error.message}`);
             }
         }
 
@@ -1254,7 +1290,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             a.click();
             window.URL.revokeObjectURL(url);
 
-            showNotification(`✅ ${type.toUpperCase()} downloaded!`);
+            showNotification(`✅ ${type.toUpperCase()} downloaded!`, 'success');
         }
 
         function copyToClipboard(id, type) {
@@ -1262,7 +1298,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             if (!app) return;
 
             navigator.clipboard.writeText(app.documents[type].content);
-            showNotification(`✅ ${type.toUpperCase()} copied to clipboard!`);
+            showNotification(`✅ ${type.toUpperCase()} copied to clipboard!`, 'success');
         }
 
         function downloadDocs(id) {
@@ -1280,7 +1316,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             applications[appIndex].statusChecks.applied = true;
 
             localStorage.setItem('applications', JSON.stringify(applications));
-            showNotification('✅ Marked as Applied!');
+            showNotification('✅ Marked as Applied!', 'success');
             loadApplications();
             updateAnalytics();
         }
@@ -1289,7 +1325,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             if (confirm('Delete this application?')) {
                 applications = applications.filter(a => a.id !== id);
                 localStorage.setItem('applications', JSON.stringify(applications));
-                showNotification('✅ Deleted!');
+                showNotification('✅ Deleted!', 'success');
                 loadApplications();
                 updateAnalytics();
             }
@@ -1351,7 +1387,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             a.click();
             window.URL.revokeObjectURL(url);
 
-            showNotification('✅ Excel file downloaded!');
+            showNotification('✅ Excel file downloaded!', 'success');
         }
 
         function saveProfile() {
@@ -1367,7 +1403,7 @@ Generate ONLY the JSON object. No other text. Make it professional, personalized
             };
 
             localStorage.setItem('userProfile', JSON.stringify(userProfile));
-            showNotification('✅ Profile Saved!<br><br>AI is ready to generate personalized documents! 🤖');
+            showNotification('✅ Profile Saved!<br><br>AI is ready to generate personalized documents! 🤖', 'success');
         }
 
         function loadProfile() {
