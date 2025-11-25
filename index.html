@@ -89,6 +89,27 @@
             display: block;
         }
 
+        .upload-section {
+            background: #f8f9ff;
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-section:hover {
+            background: #e8e9ff;
+            border-color: #5568d3;
+        }
+
+        .upload-section.has-file {
+            border-color: #28a745;
+            background: #e8f5e9;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -121,62 +142,6 @@
         .form-group textarea {
             min-height: 150px;
             resize: vertical;
-        }
-
-        .file-upload-area {
-            border: 3px dashed #667eea;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            background: #f8f9ff;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-upload-area:hover {
-            background: #e8e9ff;
-            border-color: #5568d3;
-        }
-
-        .file-upload-area.has-file {
-            border-color: #28a745;
-            background: #e8f5e9;
-        }
-
-        .uploaded-files-list {
-            margin-top: 15px;
-        }
-
-        .uploaded-file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 15px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .uploaded-file-item .file-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .uploaded-file-item .file-icon {
-            font-size: 24px;
-        }
-
-        .uploaded-file-item .remove-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
         }
 
         .btn-primary {
@@ -289,10 +254,10 @@
 
         .status-checks {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
             background: white;
             border-radius: 8px;
         }
@@ -300,10 +265,11 @@
         .status-check-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px;
+            gap: 8px;
+            padding: 8px;
             background: #f8f9fa;
             border-radius: 6px;
+            font-size: 13px;
         }
 
         .status-check-item.completed {
@@ -311,7 +277,7 @@
         }
 
         .status-check-item .check-icon {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .status-check-item.completed .check-icon {
@@ -326,7 +292,7 @@
 
         .timeline-item {
             position: relative;
-            padding-bottom: 20px;
+            padding-bottom: 15px;
         }
 
         .timeline-item::before {
@@ -412,6 +378,13 @@
             padding: 25px;
             border-radius: 12px;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .stat-card h3 {
@@ -546,6 +519,62 @@
             margin-bottom: 20px;
         }
 
+        .file-upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f8f9ff;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            background: #e8e9ff;
+            border-color: #5568d3;
+        }
+
+        .file-upload-area.has-file {
+            border-color: #28a745;
+            background: #e8f5e9;
+        }
+
+        .uploaded-files-list {
+            margin-top: 15px;
+        }
+
+        .uploaded-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .uploaded-file-item .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uploaded-file-item .file-icon {
+            font-size: 24px;
+        }
+
+        .uploaded-file-item .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -561,6 +590,47 @@
                 margin-bottom: 15px;
                 width: fit-content;
             }
+
+            .analytics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .pdf-extract-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .pdf-extract-info h4 {
+            color: #856404;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -573,15 +643,30 @@
 
         <div class="main-content">
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="showTab('new-application')">➕ New Application</button>
-                <button class="tab-btn" onclick="showTab('my-applications')">📋 My Applications</button>
-                <button class="tab-btn" onclick="showTab('analytics')">📊 Analytics & Export</button>
-                <button class="tab-btn" onclick="showTab('profile')">👤 My Profile & Documents</button>
+                <button class="tab-btn active" onclick="switchTab('new-application')">➕ New Application</button>
+                <button class="tab-btn" onclick="switchTab('my-applications')">📋 My Applications</button>
+                <button class="tab-btn" onclick="switchTab('analytics')">📊 Analytics & Export</button>
+                <button class="tab-btn" onclick="switchTab('profile')">👤 My Profile & Documents</button>
             </div>
 
             <!-- New Application Tab -->
             <div id="new-application" class="tab-content active">
                 <h2 style="margin-bottom: 30px;">Add New Job Application</h2>
+
+                <!-- PDF Upload Section -->
+                <div class="upload-section" id="pdfUploadSection" onclick="document.getElementById('pdfUpload').click()">
+                    <div style="font-size: 60px; margin-bottom: 15px;">📄</div>
+                    <h3>Upload Job Posting (PDF)</h3>
+                    <p style="color: #666; margin-top: 10px;">Upload PDF and we'll extract job details automatically</p>
+                    <p style="font-size: 12px; color: #999; margin-top: 10px;">Or fill in manually below</p>
+                    <input type="file" id="pdfUpload" accept=".pdf" style="display: none;" onchange="handlePDFUpload(event)">
+                </div>
+
+                <div id="pdfExtractInfo" class="pdf-extract-info" style="display: none;">
+                    <h4>📄 Extracted from PDF</h4>
+                    <p id="pdfFileName"></p>
+                </div>
+
                 <form id="applicationForm" onsubmit="submitApplication(event)">
                     <div class="form-group">
                         <label>Job Title *</label>
@@ -626,7 +711,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary">🤖 Add Application</button>
+                    <button type="submit" class="btn-primary">🚀 Add Application</button>
                 </form>
             </div>
 
@@ -662,7 +747,7 @@
                 <!-- Master Documents Upload Section -->
                 <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-bottom: 30px;">
                     <h3 style="margin-bottom: 20px;">📄 Master Documents</h3>
-                    <p style="color: #666; margin-bottom: 20px;">Upload your master CV and other profile documents. These will be used as templates for generating tailored application documents.</p>
+                    <p style="color: #666; margin-bottom: 20px;">Upload your master CV and other profile documents.</p>
                     
                     <div class="file-upload-area" id="cvUploadArea" onclick="document.getElementById('masterCV').click()">
                         <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
@@ -676,7 +761,6 @@
                         <div style="font-size: 48px; margin-bottom: 15px;">📎</div>
                         <h4>Upload Other Documents</h4>
                         <p style="color: #666; margin-top: 10px;">Certificates, Portfolios, References, etc.</p>
-                        <p style="font-size: 12px; color: #999;">Multiple files allowed</p>
                         <input type="file" id="otherDocs" multiple accept=".pdf,.doc,.docx" style="display: none;" onchange="handleOtherDocsUpload(event)">
                     </div>
 
@@ -712,7 +796,7 @@
 
                     <div class="form-group">
                         <label>Skills (comma-separated)</label>
-                        <textarea id="profileSkills" placeholder="e.g., Advanced Excel, Power BI, SQL, Data Analysis, Python" rows="4"></textarea>
+                        <textarea id="profileSkills" placeholder="e.g., Advanced Excel, Power BI, SQL, Data Analysis" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -748,7 +832,13 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
+        // Set PDF.js worker
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
         // Initialize data
         let applications = JSON.parse(localStorage.getItem('applications') || '[]');
         let userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
@@ -759,15 +849,37 @@
             loadApplications();
             updateAnalytics();
             displayUploadedDocs();
+            console.log('System loaded. Applications:', applications.length);
         };
 
+        // Show notification
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.innerHTML = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
         // Tab navigation
-        function showTab(tabName) {
+        function switchTab(tabName) {
+            console.log('Switching to tab:', tabName);
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            const tabContent = document.getElementById(tabName);
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+            
+            // Find and activate the clicked button
+            tabButtons.forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(tabName.replace('-', ' '))) {
+                    btn.classList.add('active');
+                }
+            });
 
             if (tabName === 'my-applications') {
                 loadApplications();
@@ -778,6 +890,106 @@
             }
         }
 
+        // Handle PDF upload
+        async function handlePDFUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const uploadSection = document.getElementById('pdfUploadSection');
+            uploadSection.classList.add('has-file');
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                let fullText = '';
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    const pageText = textContent.items.map(item => item.str).join(' ');
+                    fullText += pageText + '\n';
+                }
+
+                // Try to extract information
+                extractJobInfo(fullText, file.name);
+                
+                document.getElementById('pdfExtractInfo').style.display = 'block';
+                document.getElementById('pdfFileName').textContent = `File: ${file.name}`;
+                
+                showNotification('✅ PDF uploaded! We extracted what we could. Please verify and fill any missing fields.');
+            } catch (error) {
+                console.error('PDF extraction error:', error);
+                showNotification('⚠️ Could not extract text from PDF. Please fill in manually.');
+            }
+        }
+
+        // Extract job information from PDF text
+        function extractJobInfo(text, filename) {
+            // Try to extract job title
+            const titlePatterns = [
+                /position[:\s]+([^\n]+)/i,
+                /job title[:\s]+([^\n]+)/i,
+                /role[:\s]+([^\n]+)/i,
+                /seeking[:\s]+([^\n]+)/i
+            ];
+
+            for (const pattern of titlePatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('jobTitle').value = match[1].trim().substring(0, 100);
+                    break;
+                }
+            }
+
+            // Try to extract company
+            const companyPatterns = [
+                /company[:\s]+([^\n]+)/i,
+                /organization[:\s]+([^\n]+)/i,
+                /employer[:\s]+([^\n]+)/i
+            ];
+
+            for (const pattern of companyPatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('companyName').value = match[1].trim().substring(0, 100);
+                    break;
+                }
+            }
+
+            // Try to extract location
+            const locationPatterns = [
+                /location[:\s]+([^\n]+)/i,
+                /based in[:\s]+([^\n]+)/i,
+                /(Auckland|Wellington|Christchurch|Hamilton)[,\s]+New Zealand/i
+            ];
+
+            for (const pattern of locationPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    const location = match[1] || match[0];
+                    document.getElementById('location').value = location.trim().substring(0, 100);
+                    break;
+                }
+            }
+
+            // Try to extract reference
+            const refPatterns = [
+                /ref(?:erence)?[:\s#]+([A-Z0-9_-]+)/i,
+                /job\s+(?:ref|id)[:\s#]+([A-Z0-9_-]+)/i
+            ];
+
+            for (const pattern of refPatterns) {
+                const match = text.match(pattern);
+                if (match && match[1]) {
+                    document.getElementById('jobRef').value = match[1].trim();
+                    break;
+                }
+            }
+
+            // Put full text in description
+            document.getElementById('jobDescription').value = text.trim();
+        }
+
         // Submit application
         function submitApplication(event) {
             event.preventDefault();
@@ -786,10 +998,10 @@
                 id: Date.now(),
                 jobTitle: document.getElementById('jobTitle').value.trim(),
                 company: document.getElementById('companyName').value.trim(),
-                reference: document.getElementById('jobRef').value,
-                location: document.getElementById('location').value,
+                reference: document.getElementById('jobRef').value.trim(),
+                location: document.getElementById('location').value.trim(),
                 deadline: document.getElementById('deadline').value,
-                description: document.getElementById('jobDescription').value,
+                description: document.getElementById('jobDescription').value.trim(),
                 source: document.getElementById('source').value,
                 status: 'pending',
                 matchScore: calculateMatchScore(document.getElementById('jobDescription').value),
@@ -817,13 +1029,22 @@
             applications.push(application);
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            alert(`🎉 Application Added!\n\n${application.jobTitle} at ${application.company}\n🎯 Match Score: ${application.matchScore}%\n\n✅ CV Generated\n✅ Cover Letter Generated\n✅ Email Draft Generated`);
+            console.log('Application added:', application);
+            console.log('Total applications now:', applications.length);
+
+            showNotification(`🎉 Application Added Successfully!<br><br><strong>${application.jobTitle}</strong><br>${application.company}<br>🎯 Match Score: ${application.matchScore}%`);
             
             document.getElementById('applicationForm').reset();
-            showTab('my-applications');
+            document.getElementById('pdfUploadSection').classList.remove('has-file');
+            document.getElementById('pdfExtractInfo').style.display = 'none';
+            
+            // Auto-switch to My Applications tab
+            setTimeout(() => {
+                switchTab('my-applications');
+            }, 1500);
         }
 
-        // Generate CV (template)
+        // Generate CV
         function generateCV(jobTitle, company) {
             return {
                 generated: true,
@@ -833,18 +1054,34 @@ ${userProfile.phone || '022 619 7626'} | ${userProfile.email || 'pavithrasam.s6@
 ${userProfile.linkedin || 'linkedin.com/in/pavithra-maduranga-19624675'}
 
 OBJECTIVE
-Seeking the position of ${jobTitle} at ${company}. Bringing ${userProfile.education || 'Master of Business Analytics'} and extensive experience in data analysis, merchandise planning, and retail operations.
+Seeking the position of ${jobTitle} at ${company}. Bringing Master of Business Analytics and extensive experience in data analysis, merchandise planning, and retail operations.
 
 KEY SKILLS
-${userProfile.skills || 'Advanced Excel, Power BI, Data Analysis, SQL, Business Analytics'}
+${userProfile.skills || 'Advanced Excel, Power BI, Data Analysis, SQL, R, Python, Business Analytics, Inventory Management, Supply Chain, Merchandise Planning'}
 
 EDUCATION
-${userProfile.education || 'Master of Business Analytics - Unitec Institute of Technology (Expected 2025)'}
+${userProfile.education || 'Master of Business Analytics - Unitec Institute of Technology (Expected November 2025)\nMBA in International Business - Buckinghamshire New University (2023)\nExecutive Master of Project Management - Asia e University (2018)'}
 
-EXPERIENCE
-Supply Chain Data Analyst Intern - USL Medical (Mar 2025 - Jun 2025)
-Operations Attendant - PPCS (Nov 2024 - Jul 2025)
-Product Manager - Samsung Electronics (Jan 2015 - Jul 2024)
+PROFESSIONAL EXPERIENCE
+
+Supply Chain Data Analyst Intern
+USL Medical, Auckland | March 2025 - June 2025
+• Conducted GS1 data cross-checking and compliance reviews
+• Supported warehouse team with product verification and vendor mapping
+• Collaborated with cross-functional teams in fast-paced environment
+
+Operations Attendant
+PPCS, Auckland | November 2024 - July 2025
+• Delivered high-standard health & safety compliance
+• Managed daily operational tasks and inventory checks
+• Demonstrated excellent communication and teamwork
+
+Product Manager
+Samsung Electronics, Ceylon Business Appliances | January 2015 - July 2024
+• Achieved 120% of annual sales targets for three consecutive years
+• Delivered $15.7M in sales growth through strategic training
+• Trained 500+ retail professionals nationwide
+• Developed SOPs improving safety by 90% and satisfaction by 60%
 
 This CV has been tailored for ${jobTitle} at ${company}.`
             };
@@ -866,11 +1103,23 @@ ${company}
 
 Dear Hiring Manager,
 
-I am writing to express my strong interest in the ${jobTitle} position at ${company}. With my background in ${userProfile.education || 'Business Analytics'} and proven experience in data analysis and retail operations, I am confident in my ability to contribute effectively to your team.
+I am writing to express my strong interest in the ${jobTitle} position at ${company}. With my background in Business Analytics and proven experience in data analysis and retail operations, I am confident in my ability to contribute effectively to your team.
 
-My recent experience as a Supply Chain Data Analyst Intern at USL Medical has equipped me with practical skills in data analysis, inventory management, and compliance procedures. Combined with my Master of Business Analytics from Unitec, I bring both theoretical knowledge and hands-on expertise to this role.
+My recent experience as a Supply Chain Data Analyst Intern at USL Medical has equipped me with practical skills in:
+• Data analysis and compliance procedures
+• Inventory management and warehouse operations
+• Cross-functional team collaboration
+• GS1 standards and supply chain optimization
 
-I am particularly drawn to ${company} because of your reputation for excellence and innovation. I am excited about the opportunity to apply my analytical skills and contribute to your continued success.
+Combined with my Master of Business Analytics from Unitec (expected November 2025), I bring both theoretical knowledge and hands-on expertise to this role.
+
+Key highlights of my qualifications:
+✓ 9 years of product management and retail operations experience
+✓ Proven track record: $15.7M in sales growth, 120% target achievement
+✓ Advanced analytical skills: Power BI, Excel, SQL, R Programming
+✓ Strong merchandise planning and inventory management background
+
+I am particularly drawn to ${company} because of your reputation for excellence and innovation in the industry. I am excited about the opportunity to apply my analytical skills and retail experience to contribute to your continued success.
 
 I would welcome the opportunity to discuss how my background and skills align with your needs. Thank you for considering my application.
 
@@ -883,18 +1132,22 @@ ${userProfile.name || 'Pavithra Maduranga Bamunu'}`
         function generateEmail(jobTitle, company) {
             return {
                 generated: true,
-                content: `Subject: Application for ${jobTitle} Position
+                content: `Subject: Application for ${jobTitle} Position at ${company}
 
 Dear Hiring Manager,
 
 I am writing to apply for the ${jobTitle} position at ${company}. Please find attached my CV and cover letter for your consideration.
 
-With my background in ${userProfile.education || 'Business Analytics'} and relevant experience in data analysis and retail operations, I am confident I would be a valuable addition to your team.
+With my background in Business Analytics (Master's degree expected November 2025) and 9+ years of experience in retail operations and product management, I am confident I would be a valuable addition to your team.
 
 Key highlights of my qualifications:
-• ${userProfile.education || 'Master of Business Analytics (Expected 2025)'}
-• Experience in data analysis and supply chain management
-• Proficient in ${(userProfile.skills || 'Excel, Power BI, SQL').split(',').slice(0,3).join(', ')}
+• Master of Business Analytics - Unitec Institute of Technology (Expected Nov 2025)
+• 9 years of product management experience with Samsung Electronics
+• Proven track record: $15.7M in sales growth, 120% of annual targets
+• Proficient in: ${(userProfile.skills || 'Advanced Excel, Power BI, SQL, R, Data Analysis, Merchandise Planning').split(',').slice(0,5).join(', ')}
+• Recent supply chain analytics internship at USL Medical
+
+I am particularly interested in this role at ${company} because it aligns perfectly with my experience in ${jobTitle.toLowerCase().includes('merchandise') || jobTitle.toLowerCase().includes('analyst') ? 'merchandise planning and data analytics' : 'data analysis and operations management'}.
 
 I am available for an interview at your convenience and look forward to discussing this opportunity further.
 
@@ -903,13 +1156,14 @@ Thank you for your consideration.
 Best regards,
 ${userProfile.name || 'Pavithra Maduranga Bamunu'}
 ${userProfile.phone || '022 619 7626'}
-${userProfile.email || 'pavithrasam.s6@gmail.com'}`
+${userProfile.email || 'pavithrasam.s6@gmail.com'}
+${userProfile.linkedin || 'linkedin.com/in/pavithra-maduranga-19624675'}`
             };
         }
 
         // Calculate match score
         function calculateMatchScore(jobDescription) {
-            if (!jobDescription) return Math.floor(Math.random() * 15) + 60;
+            if (!jobDescription) return Math.floor(Math.random() * 15) + 65;
 
             const userSkills = userProfile.skills ? userProfile.skills.toLowerCase().split(',').map(s => s.trim()) : [];
             const description = jobDescription.toLowerCase();
@@ -933,6 +1187,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
 
         // Load applications
         function loadApplications() {
+            console.log('Loading applications. Count:', applications.length);
             const container = document.getElementById('applicationsList');
             
             if (applications.length === 0) {
@@ -941,6 +1196,9 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                         <div class="icon">📭</div>
                         <h3>No Applications Yet</h3>
                         <p>Start by adding your first job application!</p>
+                        <button onclick="switchTab('new-application')" class="btn-primary" style="max-width: 300px; margin: 20px auto;">
+                            ➕ Add Your First Application
+                        </button>
                     </div>
                 `;
                 return;
@@ -954,13 +1212,14 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     
                     ${app.location ? `<div class="info">📍 ${app.location}</div>` : ''}
                     ${app.deadline ? `<div class="info">⏰ Deadline: ${new Date(app.deadline).toLocaleDateString()}</div>` : ''}
+                    ${app.reference ? `<div class="info">🔖 Ref: ${app.reference}</div>` : ''}
                     
                     <div class="match-score">🎯 Match Score: ${app.matchScore}%</div>
                     
                     <div class="status-checks">
                         <div class="status-check-item ${app.statusChecks.cvGenerated ? 'completed' : ''}">
                             <span class="check-icon">${app.statusChecks.cvGenerated ? '✅' : '⏳'}</span>
-                            <span>CV Generated</span>
+                            <span>CV</span>
                         </div>
                         <div class="status-check-item ${app.statusChecks.coverLetterGenerated ? 'completed' : ''}">
                             <span class="check-icon">${app.statusChecks.coverLetterGenerated ? '✅' : '⏳'}</span>
@@ -968,7 +1227,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                         </div>
                         <div class="status-check-item ${app.statusChecks.emailGenerated ? 'completed' : ''}">
                             <span class="check-icon">${app.statusChecks.emailGenerated ? '✅' : '⏳'}</span>
-                            <span>Email Draft</span>
+                            <span>Email</span>
                         </div>
                         <div class="status-check-item ${app.statusChecks.applied ? 'completed' : ''}">
                             <span class="check-icon">${app.statusChecks.applied ? '✅' : '❌'}</span>
@@ -1007,7 +1266,9 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                         </div>
                     ` : ''}
                     
-                    <div class="info" style="margin-top: 10px;">Added: ${new Date(app.dateAdded).toLocaleDateString()} ${app.reference ? `| Ref: ${app.reference}` : ''}</div>
+                    <div class="info" style="margin-top: 10px; font-size: 12px;">
+                        Added: ${new Date(app.dateAdded).toLocaleDateString()} at ${new Date(app.dateAdded).toLocaleTimeString()}
+                    </div>
                     
                     <div class="action-buttons">
                         <button class="action-btn btn-view" onclick="viewDetails(${app.id})">👁️ View Details</button>
@@ -1019,6 +1280,8 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     </div>
                 </div>
             `).join('');
+
+            console.log('Applications loaded successfully');
         }
 
         // View documents
@@ -1039,7 +1302,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     <h4>Tailored CV for ${app.jobTitle} at ${app.company}</h4>
                     <pre style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.6;">${app.documents.cv.content}</pre>
                 </div>
-                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                     <button onclick="downloadSingleDoc(${id}, 'cv')" class="btn-secondary">📥 Download CV</button>
                     <button onclick="downloadSingleDoc(${id}, 'coverLetter')" class="btn-secondary">📥 Download Cover Letter</button>
                     <button onclick="downloadSingleDoc(${id}, 'email')" class="btn-secondary">📥 Download Email</button>
@@ -1086,7 +1349,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             a.click();
             window.URL.revokeObjectURL(url);
 
-            alert(`✅ ${type.toUpperCase()} downloaded as ${filename}`);
+            showNotification(`✅ ${type.toUpperCase()} downloaded!`);
         }
 
         // Download all docs
@@ -1108,7 +1371,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
 
             localStorage.setItem('applications', JSON.stringify(applications));
             
-            alert(`✅ Marked as Applied!\n\nDate: ${new Date(currentDate).toLocaleString()}\n\nYou can now track when you receive a response.`);
+            showNotification(`✅ Marked as Applied!<br><br>Date/Time: ${new Date(currentDate).toLocaleString()}`);
             loadApplications();
             updateAnalytics();
         }
@@ -1191,7 +1454,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             applications[appIndex].statusChecks.responseReceived = true;
             
             localStorage.setItem('applications', JSON.stringify(applications));
-            alert('✅ Response marked as received!');
+            showNotification('✅ Response marked as received!');
             closeModal('detailsModal');
             loadApplications();
         }
@@ -1211,7 +1474,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             applications[appIndex].statusChecks.interviewScheduled = true;
             
             localStorage.setItem('applications', JSON.stringify(applications));
-            alert('✅ Interview date set!');
+            showNotification('✅ Interview date set!');
             closeModal('detailsModal');
             loadApplications();
         }
@@ -1233,7 +1496,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             }
 
             localStorage.setItem('applications', JSON.stringify(applications));
-            alert('✅ Application updated!');
+            showNotification('✅ Application updated!');
             closeModal('detailsModal');
             loadApplications();
             updateAnalytics();
@@ -1255,8 +1518,8 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             applications = applications.filter(a => a.id !== id);
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            document.querySelectorAll('.tab-btn')[0].click();
-            alert('✏️ Application loaded for editing. Make changes and submit.');
+            switchTab('new-application');
+            showNotification('✏️ Application loaded for editing. Make changes and submit.');
         }
 
         // Delete application
@@ -1267,7 +1530,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             if (confirm(`Delete Application?\n\n${app.jobTitle} at ${app.company}\n\nThis cannot be undone.`)) {
                 applications = applications.filter(a => a.id !== id);
                 localStorage.setItem('applications', JSON.stringify(applications));
-                alert('✅ Deleted!');
+                showNotification('✅ Application deleted!');
                 loadApplications();
                 updateAnalytics();
             }
@@ -1275,6 +1538,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
 
         // Update analytics
         function updateAnalytics() {
+            console.log('Updating analytics. Applications:', applications.length);
             const container = document.getElementById('analyticsGrid');
             
             if (applications.length === 0) {
@@ -1283,6 +1547,9 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                         <div class="icon">📊</div>
                         <h3>No Data Yet</h3>
                         <p>Add applications to see analytics!</p>
+                        <button onclick="switchTab('new-application')" class="btn-primary" style="max-width: 300px; margin: 20px auto;">
+                            ➕ Add Your First Application
+                        </button>
                     </div>
                 `;
                 return;
@@ -1311,7 +1578,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             const offers = applications.filter(app => app.status === 'offer').length;
 
             container.innerHTML = `
-                <div class="stat-card">
+                <div class="stat-card" onclick="switchTab('my-applications')" title="Click to view all applications">
                     <h3>${total}</h3>
                     <p>Total Applications</p>
                 </div>
@@ -1319,7 +1586,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     <h3>${avgMatch}%</h3>
                     <p>Avg Match Score</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="filterByStatus('interview')" title="Click to view interview applications">
                     <h3>${interviewRate}%</h3>
                     <p>Interview Rate</p>
                 </div>
@@ -1327,26 +1594,32 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     <h3>${avgResponse}</h3>
                     <p>Avg Response (days)</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="filterByStatus('pending')" title="Click to view pending applications">
                     <h3>${pending}</h3>
                     <p>Pending</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="filterByStatus('submitted')" title="Click to view submitted applications">
                     <h3>${submittedCount}</h3>
                     <p>Submitted</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="filterByStatus('interview')" title="Click to view interview applications">
                     <h3>${interviewed}</h3>
                     <p>Interviews</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="filterByStatus('offer')" title="Click to view offers">
                     <h3>${offers}</h3>
                     <p>Offers</p>
                 </div>
             `;
         }
 
-        // Export to Excel (CSV format - opens in Excel)
+        // Filter by status (when clicking analytics tiles)
+        function filterByStatus(status) {
+            switchTab('my-applications');
+            // Could add filtering logic here in future
+        }
+
+        // Export to Excel
         function exportToExcel() {
             if (applications.length === 0) {
                 alert('No applications to export!');
@@ -1407,7 +1680,6 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     app.statusChecks.responseReceived ? 'YES' : 'NO',
                     app.notes || ''
                 ].map(cell => {
-                    // Escape quotes and wrap in quotes if contains comma
                     const cellStr = String(cell).replace(/"/g, '""');
                     return cellStr.includes(',') ? `"${cellStr}"` : cellStr;
                 });
@@ -1423,10 +1695,10 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
             link.click();
             window.URL.revokeObjectURL(url);
 
-            alert('✅ Excel tracker downloaded!\n\nOpen with Microsoft Excel or Google Sheets.\n\nFile includes all application data, timestamps, and tracking information.');
+            showNotification('✅ Excel tracker downloaded!<br><br>Open with Microsoft Excel or Google Sheets');
         }
 
-        // Export to CSV (same as Excel for this version)
+        // Export to CSV (same function)
         function exportToCSV() {
             exportToExcel();
         }
@@ -1453,7 +1725,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                 
                 localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
                 document.getElementById('cvUploadArea').classList.add('has-file');
-                alert('✅ Master CV uploaded successfully!');
+                showNotification('✅ Master CV uploaded successfully!');
                 displayUploadedDocs();
             };
             reader.readAsDataURL(file);
@@ -1491,7 +1763,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                 reader.readAsDataURL(file);
             });
 
-            alert(`✅ ${files.length} document(s) uploaded!`);
+            showNotification(`✅ ${files.length} document(s) uploaded!`);
         }
 
         // Display uploaded documents
@@ -1543,7 +1815,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                 localStorage.setItem('masterDocuments', JSON.stringify(masterDocuments));
                 document.getElementById('cvUploadArea').classList.remove('has-file');
                 displayUploadedDocs();
-                alert('✅ Master CV removed');
+                showNotification('✅ Master CV removed');
             }
         }
 
@@ -1556,7 +1828,7 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
                     document.getElementById('otherDocsUploadArea').classList.remove('has-file');
                 }
                 displayUploadedDocs();
-                alert('✅ Document removed');
+                showNotification('✅ Document removed');
             }
         }
 
@@ -1576,12 +1848,13 @@ ${userProfile.email || 'pavithrasam.s6@gmail.com'}`
 
             localStorage.setItem('userProfile', JSON.stringify(userProfile));
             
+            // Recalculate match scores
             applications.forEach(app => {
                 app.matchScore = calculateMatchScore(app.description);
             });
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            alert('✅ Profile saved!\n\n💡 Match scores recalculated based on your updated profile.');
+            showNotification('✅ Profile saved!<br><br>💡 Match scores recalculated');
             loadApplications();
             updateAnalytics();
         }
